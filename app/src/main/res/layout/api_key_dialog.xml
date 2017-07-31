@@ -10,7 +10,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/floating_loginid_hint"
         app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:padding="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <EditText
             android:id="@id/loginid_edittext"
@@ -29,7 +32,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/floating_password_hint"
         app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:padding="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <EditText
             android:id="@id/password_edittext"
@@ -48,7 +54,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/floating_name_hint"
         app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:padding="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <EditText
             android:id="@id/name_edittext"

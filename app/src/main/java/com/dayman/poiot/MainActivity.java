@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private APIManager mApiManager;
 
-    public static String VERSION = "0.0.3-A";
+    public static String VERSION = "0.0.4-A";
 
     // TODO WARN ABOUT DUPLICATES
     // TODO DISPLAY LINEARLAYOUT WITH TEXTVIEW IF THERE ARE NO SIGFOX ACCOUNTS
@@ -138,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+                        } else if (items[i].equals("Info")) {
+                            // TODO SHOW DEVICE INFO HERE
                         } else {
                             Log.d("MainActivity.java", "Unknown Option Selected");
                         }
