@@ -59,7 +59,9 @@ public class MessagesActivity extends AppCompatActivity {
 
         AccountHeaderBuilder ahb = new AccountHeaderBuilder().withActivity(this).withSelectionFirstLine("Pycom Companion").withSelectionSecondLine("View & Manage SiPy Devices");
 
-        new DrawerBuilder()
+        // TODO FIX ABOUT SCREEN BEING SELECTED ITEM
+
+        final Drawer d = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar((Toolbar) findViewById(R.id.main_toolbar))
                 .withAccountHeader(ahb.build())
@@ -69,20 +71,22 @@ public class MessagesActivity extends AppCompatActivity {
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withIdentifier(2).withName("About").withTag("Info").withIcon(R.drawable.ic_info),
                         new PrimaryDrawerItem().withIdentifier(3).withName("Settings").withIcon(R.drawable.ic_settings)
-                ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                ).withSelectedItem(0).build();
+
+        d.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
             public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                // Toast.makeText(view.getContext(), "" + drawerItem.getTag(), Toast.LENGTH_SHORT).show();
-
                 if (drawerItem.getTag() == "Info") {
                     Intent intent = new Intent(view.getContext(), AboutActivity.class);
 
                     startActivity(intent);
+
+                    d.setSelection(0);
                 }
 
                 return false;
             }
-        }).build();
+        });
     }
 
     private String getDeviceID() throws Exception {
