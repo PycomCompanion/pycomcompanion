@@ -20,6 +20,11 @@ import java.util.ArrayList;
 
 public class SensorDataListAdapter extends ArrayAdapter<SensorData> {
 
+    private static class SensorDataViewHolder {
+        TextView dataTextView;
+        TextView dateTimeTextView;
+    }
+
     private Context mContext;
     private int mResource;
 
@@ -32,17 +37,25 @@ public class SensorDataListAdapter extends ArrayAdapter<SensorData> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String data = getItem(position).getData();
-        String dateTime = getItem(position).getDateTime();
+        SensorDataViewHolder holder;
 
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        convertView = inflater.inflate(mResource, parent, false);
+        LayoutInflater mInflater = LayoutInflater.from(mContext);
 
-        TextView dataTv = convertView.findViewById(R.id.data_text_view);
-        TextView dateTimeTv = convertView.findViewById(R.id.date_time_textview);
+        if (convertView == null) {
+            convertView = mInflater.inflate(mResource, null);
+            holder = new SensorDataViewHolder();
+            holder.dataTextView = convertView.findViewById(R.id.data_text_view);
+            holder.dateTimeTextView = convertView.findViewById(R.id.date_time_textview);
+            convertView.setTag(holder);
+        } else {
+            holder = (SensorDataViewHolder) convertView.getTag();
+        }
 
-        dataTv.setText(data);
-        dateTimeTv.setText(dateTime);
+        SensorData sd = getItem(position);
+
+        holder.dataTextView.setText(sd.getData());
+        holder.dateTimeTextView.setText(sd.getDateTime());
+
 
         return convertView;
     }

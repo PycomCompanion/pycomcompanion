@@ -20,6 +20,10 @@ import java.util.List;
 
 public class ApiKeyAdapter extends ArrayAdapter<ApiKey> {
 
+    private static class ApiKeyViewHolder {
+        TextView apiKeyName;
+    }
+
     private Context mContext;
     private int mResource;
 
@@ -33,14 +37,22 @@ public class ApiKeyAdapter extends ArrayAdapter<ApiKey> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        ApiKeyViewHolder holder;
+
+        LayoutInflater mInflater = LayoutInflater.from(mContext);
+
+        if (convertView == null) {
+            convertView = mInflater.inflate(mResource, null);
+            holder = new ApiKeyViewHolder();
+            holder.apiKeyName = convertView.findViewById(R.id.api_key_name_textview);
+            convertView.setTag(holder);
+        } else {
+            holder = (ApiKeyViewHolder) convertView.getTag();
+        }
+
         String name = getItem(position).getName();
 
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        convertView = inflater.inflate(mResource, parent, false);
-
-        TextView apiKeyName = convertView.findViewById(R.id.api_key_name_textview);
-
-        apiKeyName.setText(name);
+        holder.apiKeyName.setText(name);
 
         return convertView;
     }

@@ -25,7 +25,6 @@ public class APIManager {
     private File path;
     private File file;
 
-    // TODO MODIFY SO THAT ALL METHODS THROW AN EXCEPTION INSTEAD OF TRY/CATCH
     // TODO POSSIBLY REMOVE THE TWO METHODS FOR WRITING CREDS
     // TODO CLEANUP
 
