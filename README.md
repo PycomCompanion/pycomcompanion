@@ -22,6 +22,9 @@ Screenshots can be found on [Imgur](http://imgur.com/a/YWn8T).
 - Encrypt Sigfox developer ID
 - Lower minSdkVersion
 - Ability to filter data
+- Activity for displaying device information
+- Display device information in the main activity
+- Colour code devices
 
 ## Contributing
 All code contributions are welcomed. Feature suggestions, code cleanup or general app optimisations are greatly appreciated. As this app is not complete, any contributions towards finishing up the app would be welcome. The app may not be written in the best possible way, so if you are an experienced Android developer and notice thing which could and/or should be done better, do not hesitate to let us know. All contributions help.
