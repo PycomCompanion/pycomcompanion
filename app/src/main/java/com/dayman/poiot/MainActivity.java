@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
             mApiManager = new APIManager(getApplicationContext());
 
             ArrayList<String> creds = mApiManager.getCreds();
-            for (String c : creds)
-                Log.d("MainActivity.java", "Cred is: " + c);
 
             if (!(creds.size() <= 0)) {
                 for (String c : creds) {
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         mApiKeyListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapterView, View view, int i, long l) {
-                final CharSequence[] items = { "Edit", "Delete" };
+                final CharSequence[] items = { "Info", "Edit", "Delete" };
 
                 final int index = i;
 

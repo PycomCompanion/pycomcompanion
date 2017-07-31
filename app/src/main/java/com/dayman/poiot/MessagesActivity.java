@@ -22,8 +22,6 @@ import java.util.ArrayList;
 
 public class MessagesActivity extends AppCompatActivity {
 
-    private String deviceID;
-
     private JSigfox sigfox;
     private JParser parser;
 
@@ -46,7 +44,7 @@ public class MessagesActivity extends AppCompatActivity {
         parser = new JParser();
 
         try {
-            deviceID = getDeviceID();
+            String deviceID = getDeviceID();
             getMessages(deviceID);
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,18 +57,19 @@ public class MessagesActivity extends AppCompatActivity {
 
         AccountHeaderBuilder ahb = new AccountHeaderBuilder().withActivity(this).withSelectionFirstLine("Pycom Companion").withSelectionSecondLine("View & Manage SiPy Devices");
 
-        // TODO FIX ABOUT SCREEN BEING SELECTED ITEM
+        int count = 0;
 
         final Drawer d = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar((Toolbar) findViewById(R.id.main_toolbar))
                 .withAccountHeader(ahb.build())
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withIdentifier(0).withName("Data List"),
-                        new PrimaryDrawerItem().withIdentifier(1).withName("Graphs"),
-                        new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(2).withName("About").withTag("Info").withIcon(R.drawable.ic_info),
-                        new PrimaryDrawerItem().withIdentifier(3).withName("Settings").withIcon(R.drawable.ic_settings)
+                        new PrimaryDrawerItem().withIdentifier(count).withName("Data List"),
+                        new PrimaryDrawerItem().withIdentifier(++count).withName("Graphs"),
+                        new PrimaryDrawerItem().withIdentifier(++count).withName("Device Info"),
+                        new DividerDrawerItem().withIdentifier(++count),
+                        new PrimaryDrawerItem().withIdentifier(++count).withName("About").withTag("Info").withIcon(R.drawable.ic_info),
+                        new PrimaryDrawerItem().withIdentifier(++count).withName("Settings").withIcon(R.drawable.ic_settings)
                 ).withSelectedItem(0).build();
 
         d.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -95,6 +94,7 @@ public class MessagesActivity extends AppCompatActivity {
         String json = sigfox.GET(deviceIDparameter);
 
         // Returning the first because there can only be one attached to each API key
+
         return parser.getValues(json, "id")[0];
     }
 
