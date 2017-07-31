@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="visible" type="id"/>
+
     <item type="id" name="loginid_edittext" />
     <item type="id" name="password_edittext" />
     <item type="id" name="name_edittext" />
