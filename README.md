@@ -21,7 +21,6 @@ Screenshots can be found on [Imgur](http://imgur.com/a/YWn8T).
 - Custom theming options
 - Encrypt Sigfox developer ID
 - Lower minSdkVersion
-- Change edittext and textview to be more like [this](https://material.io/guidelines/components/text-fields.html#text-fields-layout)
 
 ## Contributing
 All code contributions are welcomed. Feature suggestions, code cleanup or general app optimisations are greatly appreciated. As this app is not complete, any contributions towards finishing up the app would be welcome. The app may not be written in the best possible way, so if you are an experienced Android developer and notice thing which could and/or should be done better, do not hesitate to let us know. All contributions help.
