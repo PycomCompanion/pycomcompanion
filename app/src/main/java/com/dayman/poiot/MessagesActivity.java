@@ -1,21 +1,24 @@
 package com.dayman.poiot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ListView;
 
+import com.dayman.poiot.adapters.SensorData;
+import com.dayman.poiot.adapters.SensorDataListAdapter;
+import com.dayman.poiot.backend.JParser;
+import com.dayman.poiot.backend.JSigfox;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import java.util.ArrayList;
-
-import adapters.SensorData;
-import adapters.SensorDataListAdapter;
-import backend.JParser;
-import backend.JSigfox;
 
 public class MessagesActivity extends AppCompatActivity {
 
@@ -30,6 +33,9 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
+
+        Toolbar tb = (Toolbar) findViewById(R.id.main_toolbar);
+        tb.setTitle(R.string.messages_activity_title);
 
         String loginID = getIntent().getExtras().getString("loginID");
         String password = getIntent().getExtras().getString("password");
@@ -61,9 +67,22 @@ public class MessagesActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withIdentifier(0).withName("Data List"),
                         new PrimaryDrawerItem().withIdentifier(1).withName("Graphs"),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(2).withName("About").withIcon(R.drawable.ic_info),
+                        new PrimaryDrawerItem().withIdentifier(2).withName("About").withTag("Info").withIcon(R.drawable.ic_info),
                         new PrimaryDrawerItem().withIdentifier(3).withName("Settings").withIcon(R.drawable.ic_settings)
-                ).build();
+                ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+            @Override
+            public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                // Toast.makeText(view.getContext(), "" + drawerItem.getTag(), Toast.LENGTH_SHORT).show();
+
+                if (drawerItem.getTag() == "Info") {
+                    Intent intent = new Intent(view.getContext(), AboutActivity.class);
+
+                    startActivity(intent);
+                }
+
+                return false;
+            }
+        }).build();
     }
 
     private String getDeviceID() throws Exception {

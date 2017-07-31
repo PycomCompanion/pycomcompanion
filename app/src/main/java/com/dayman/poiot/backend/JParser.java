@@ -1,4 +1,4 @@
-package backend;
+package com.dayman.poiot.backend;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

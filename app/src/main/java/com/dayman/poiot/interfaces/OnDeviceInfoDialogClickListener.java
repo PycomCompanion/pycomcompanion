@@ -1,4 +1,4 @@
-package dialogs;
+package com.dayman.poiot.interfaces;
 
 import android.view.View;
 

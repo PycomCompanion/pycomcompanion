@@ -23,14 +23,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp"
-            android:text="@string/select_sigfox_device"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
         <ListView
             android:id="@+id/api_key_list_view"
             android:layout_width="match_parent"

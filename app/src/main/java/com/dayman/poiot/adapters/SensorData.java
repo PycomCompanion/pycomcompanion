@@ -1,4 +1,4 @@
-package adapters;
+package com.dayman.poiot.adapters;
 
 /**
  * Created by 25143j on 21/07/2017.

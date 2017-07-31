@@ -1,4 +1,4 @@
-package adapters;
+package com.dayman.poiot.adapters;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -12,24 +12,24 @@ import android.widget.TextView;
 
 import com.dayman.poiot.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
- * Created by 25143j on 26/07/2017.
+ * Created by 25143j on 21/07/2017.
  */
 
-public class ApiKeyAdapter extends ArrayAdapter<ApiKey> {
+public class SensorDataListAdapter extends ArrayAdapter<SensorData> {
 
-    private static class ApiKeyViewHolder {
-        TextView apiKeyName;
+    private static class SensorDataViewHolder {
+        TextView dataTextView;
+        TextView dateTimeTextView;
     }
 
     private Context mContext;
     private int mResource;
 
-    public ApiKeyAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<ApiKey> objects) {
+    public SensorDataListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<SensorData> objects) {
         super(context, resource, objects);
-
         mContext = context;
         mResource = resource;
     }
@@ -37,22 +37,25 @@ public class ApiKeyAdapter extends ArrayAdapter<ApiKey> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ApiKeyViewHolder holder;
+        SensorDataViewHolder holder;
 
         LayoutInflater mInflater = LayoutInflater.from(mContext);
 
         if (convertView == null) {
             convertView = mInflater.inflate(mResource, null);
-            holder = new ApiKeyViewHolder();
-            holder.apiKeyName = convertView.findViewById(R.id.api_key_name_textview);
+            holder = new SensorDataViewHolder();
+            holder.dataTextView = convertView.findViewById(R.id.data_text_view);
+            holder.dateTimeTextView = convertView.findViewById(R.id.date_time_textview);
             convertView.setTag(holder);
         } else {
-            holder = (ApiKeyViewHolder) convertView.getTag();
+            holder = (SensorDataViewHolder) convertView.getTag();
         }
 
-        String name = getItem(position).getName();
+        SensorData sd = getItem(position);
 
-        holder.apiKeyName.setText(name);
+        holder.dataTextView.setText(sd.getData());
+        holder.dateTimeTextView.setText(sd.getDateTime());
+
 
         return convertView;
     }
