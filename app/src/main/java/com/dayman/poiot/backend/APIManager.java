@@ -59,6 +59,19 @@ public class APIManager {
         sink.write(content + "\n");
     }
 
+    public void writeCreds(String... creds) throws IOException {
+        CharSink sink = Files.asCharSink(file, Charsets.UTF_8, FileWriteMode.APPEND);
+
+        String contents = "";
+
+        for (String s : creds) {
+            contents += s + ",";
+        }
+
+        contents += "\n";
+
+    }
+
     public ArrayList<String> getCreds() throws IOException {
         ArrayList<String> creds = new ArrayList<>();
 
@@ -111,6 +124,28 @@ public class APIManager {
             } else {
                 String[] creds = credsArray.get(i).split(",");
                 writeCreds(creds[0] + "," + creds[1] + "," + creds[2]);
+            }
+        }
+    }
+
+    public void editCreds(int target, String... c) throws IOException {
+        // Backup creds
+        ArrayList<String> credsArray = getCreds();
+
+        // Deleting all creds
+        deleteCreds();
+
+        setupFiles();
+
+        String contents = "";
+
+        for (int i = 0; i < credsArray.size(); i++) {
+            if (i == target) {
+                for (String s : c) {
+                    contents += s + ",";
+                }
+            } else {
+                writeCreds(credsArray.get(i).split(","));
             }
         }
     }

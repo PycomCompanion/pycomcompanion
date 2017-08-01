@@ -6,6 +6,7 @@ package com.dayman.poiot.adapters;
 
 public class ApiKey {
 
+    // Add colour to here
     private String name;
     private String loginID;
     private String password;

@@ -65,7 +65,7 @@ public class MessagesActivity extends AppCompatActivity {
                 .withAccountHeader(ahb.build())
                 .addDrawerItems(
                         new PrimaryDrawerItem().withIdentifier(count).withName("Data List"),
-                        new PrimaryDrawerItem().withIdentifier(++count).withName("Graphs"),
+                        new PrimaryDrawerItem().withIdentifier(++count).withTag("Graphs").withName("Graphs"),
                         new PrimaryDrawerItem().withIdentifier(++count).withName("Device Info"),
                         new DividerDrawerItem().withIdentifier(++count),
                         new PrimaryDrawerItem().withIdentifier(++count).withName("About").withTag("Info").withIcon(R.drawable.ic_info),
@@ -75,7 +75,13 @@ public class MessagesActivity extends AppCompatActivity {
         d.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
             public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                if (drawerItem.getTag() == "Info") {
+                if (drawerItem.getTag().equals("Graphs")) {
+//                    Intent intent = new Intent(view.getContext(), GraphActivity.class);
+//
+//                    startActivity(intent);
+
+                    d.setSelection(0);
+                } else if (drawerItem.getTag().equals("Info")) {
                     Intent intent = new Intent(view.getContext(), AboutActivity.class);
 
                     startActivity(intent);
@@ -83,7 +89,7 @@ public class MessagesActivity extends AppCompatActivity {
                     d.setSelection(0);
                 }
 
-                return false;
+                return true;
             }
         });
     }

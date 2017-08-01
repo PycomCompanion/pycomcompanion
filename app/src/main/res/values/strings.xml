@@ -7,6 +7,7 @@
 
     <string name="main_activity_title">Select Sigfox Device</string>
     <string name="messages_activity_title">Device Messages</string>
+    <string name="graph_activity_title">Graphs and shit</string>
     <string name="settings_activity_title">Settings</string>
     <string name="about_activity_title">About</string>
 
@@ -18,6 +19,7 @@
     <string name="sigfox_loginid_hint">Sigfox Login ID</string>
     <string name="sigfox_password_hint">Sigfox Password</string>
     <string name="sigfox_device_name_hint">Sigfox Device Name</string>
+    <string name="sigfox_device_color_picker_text">Choose a Colour</string>
 
     <string name="data_placeholder">Data Placeholder</string>
     <string name="date_and_time_placeholder">Date and Time Placeholder</string>

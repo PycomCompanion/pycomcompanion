@@ -1,74 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+
+<ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/floating_loginid_hint"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@id/loginid_edittext"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/sigfox_loginid_hint"
-            android:maxLines="1"
-            android:nextFocusDown="@id/password_edittext"
-            android:selectAllOnFocus="false"
-            android:singleLine="true" />
+            android:id="@+id/floating_loginid_hint"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@id/loginid_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sigfox_loginid_hint"
+                android:maxLines="1"
+                android:nextFocusDown="@id/password_edittext"
+                android:selectAllOnFocus="false"
+                android:singleLine="true" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/floating_password_hint"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@id/password_edittext"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/sigfox_password_hint"
-            android:maxLines="1"
-            android:nextFocusDown="@id/name_edittext"
-            android:selectAllOnFocus="false"
-            android:singleLine="true" />
+            android:id="@+id/floating_password_hint"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@id/password_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sigfox_password_hint"
+                android:maxLines="1"
+                android:nextFocusDown="@id/name_edittext"
+                android:selectAllOnFocus="false"
+                android:singleLine="true" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/floating_name_hint"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@id/name_edittext"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/sigfox_device_name_hint"
-            android:inputType="textPersonName"
-            android:maxLines="1"
-            android:selectAllOnFocus="false"
-            android:singleLine="true" />
+            android:id="@+id/floating_name_hint"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@id/name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sigfox_device_name_hint"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:selectAllOnFocus="false"
+                android:singleLine="true" />
 
-</LinearLayout>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/sigfox_device_colour_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sigfox_device_color_picker_text"
+            android:layout_margin="16dp"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+</ScrollView>
