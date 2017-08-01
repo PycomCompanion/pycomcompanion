@@ -10,7 +10,7 @@ PyCom Companion is in an early stage and is not considered complete yet. More wo
 Screenshots can be found on [Imgur](http://imgur.com/a/YWn8T).
 
 ## Known Bugs
-- In Split screen some of the "Add Device" dialogue content is cut off
+- Dialogue box for adding device will disappear when switching into split-screen
 
 ## Todo
 - Add data visualisation
