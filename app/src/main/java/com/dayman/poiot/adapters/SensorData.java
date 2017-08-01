@@ -1,10 +1,13 @@
 package com.dayman.poiot.adapters;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by 25143j on 21/07/2017.
  */
 
-public class SensorData {
+public class SensorData implements Parcelable {
 
     private String data;
     private String dateTime;
@@ -13,6 +16,23 @@ public class SensorData {
         this.data = data;
         this.dateTime = dateTime;
     }
+
+    protected SensorData(Parcel in) {
+        data = in.readString();
+        dateTime = in.readString();
+    }
+
+    public static final Creator<SensorData> CREATOR = new Creator<SensorData>() {
+        @Override
+        public SensorData createFromParcel(Parcel in) {
+            return new SensorData(in);
+        }
+
+        @Override
+        public SensorData[] newArray(int size) {
+            return new SensorData[size];
+        }
+    };
 
     public void setData(String data) {
         this.data = data;
@@ -30,4 +50,14 @@ public class SensorData {
         return this.dateTime;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(data);
+        parcel.writeString(dateTime);
+    }
 }

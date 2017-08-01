@@ -75,13 +75,15 @@ public class MessagesActivity extends AppCompatActivity {
         d.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
             public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                if (drawerItem.getTag().equals("Graphs")) {
-//                    Intent intent = new Intent(view.getContext(), GraphActivity.class);
-//
-//                    startActivity(intent);
+                if (drawerItem.getTag() == "Graphs") {
+                    Intent intent = new Intent(view.getContext(), GraphActivity.class);
+
+                    intent.putParcelableArrayListExtra("data", mSensorData);
+
+                    startActivity(intent);
 
                     d.setSelection(0);
-                } else if (drawerItem.getTag().equals("Info")) {
+                } else if (drawerItem.getTag() == "Info") {
                     Intent intent = new Intent(view.getContext(), AboutActivity.class);
 
                     startActivity(intent);
