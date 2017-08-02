@@ -2,6 +2,7 @@ package com.dayman.poiot;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.dayman.poiot.adapters.SensorData;
 import com.github.mikephil.charting.charts.LineChart;
@@ -19,7 +20,6 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-
         ArrayList<SensorData> data = getIntent().getParcelableArrayListExtra("data");
 
         LineChart lc = (LineChart) findViewById(R.id.data_line_chart);
@@ -32,12 +32,15 @@ public class GraphActivity extends AppCompatActivity {
         // Fix later, maybe preference for data delimiter
         for (SensorData d : data) {
             String[] splitData = d.getData().split("-");
+            Log.d("GraphActivity.java", splitData[0] + "," + splitData[1]);
 
-            entries.add(new Entry(10, 10));
-            entries.add(new Entry(10, 20));
-            entries.add(new Entry(10, 30));
-            entries.add(new Entry(10, 40));
-            entries.add(new Entry(10, 50));
+            entries.add(new Entry(Float.parseFloat(splitData[0]), Float.parseFloat(splitData[1])));
+
+//            entries.add(new Entry(10, 10));
+//            entries.add(new Entry(10, 20));
+//            entries.add(new Entry(10, 30));
+//            entries.add(new Entry(10, 40));
+//            entries.add(new Entry(10, 50));
         }
 
         LineDataSet lds = new LineDataSet(entries, "Temperatures");

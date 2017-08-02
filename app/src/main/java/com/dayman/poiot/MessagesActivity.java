@@ -11,6 +11,7 @@ import com.dayman.poiot.adapters.SensorData;
 import com.dayman.poiot.adapters.SensorDataListAdapter;
 import com.dayman.poiot.backend.JParser;
 import com.dayman.poiot.backend.JSigfox;
+import com.dayman.poiot.enums.Tags;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -64,18 +65,19 @@ public class MessagesActivity extends AppCompatActivity {
                 .withToolbar((Toolbar) findViewById(R.id.main_toolbar))
                 .withAccountHeader(ahb.build())
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withIdentifier(count).withName("Data List"),
-                        new PrimaryDrawerItem().withIdentifier(++count).withTag("Graphs").withName("Graphs"),
-                        new PrimaryDrawerItem().withIdentifier(++count).withName("Device Info"),
+                        new PrimaryDrawerItem().withIdentifier(count).withTag(Tags.DATA_LIST).withName("Data List").withIcon(R.drawable.ic_data_list),
+                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.GRAPHS).withName("Graphs").withIcon(R.drawable.ic_graph),
+                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.FILTER).withName("Filter").withIcon(R.drawable.ic_filter),
+                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.DEVICE_INFO).withName("Device Info").withIcon(R.drawable.ic_device_info),
                         new DividerDrawerItem().withIdentifier(++count),
-                        new PrimaryDrawerItem().withIdentifier(++count).withName("About").withTag("Info").withIcon(R.drawable.ic_info),
-                        new PrimaryDrawerItem().withIdentifier(++count).withName("Settings").withIcon(R.drawable.ic_settings)
+                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.ABOUT).withName("About").withIcon(R.drawable.ic_info),
+                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.SETTINGS).withName("Settings").withIcon(R.drawable.ic_settings)
                 ).withSelectedItem(0).build();
 
         d.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
             public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                if (drawerItem.getTag() == "Graphs") {
+                if (drawerItem.getTag().equals(Tags.GRAPHS)) {
                     Intent intent = new Intent(view.getContext(), GraphActivity.class);
 
                     intent.putParcelableArrayListExtra("data", mSensorData);
@@ -83,7 +85,7 @@ public class MessagesActivity extends AppCompatActivity {
                     startActivity(intent);
 
                     d.setSelection(0);
-                } else if (drawerItem.getTag() == "Info") {
+                } else if (drawerItem.getTag().equals(Tags.ABOUT)) {
                     Intent intent = new Intent(view.getContext(), AboutActivity.class);
 
                     startActivity(intent);
@@ -102,7 +104,6 @@ public class MessagesActivity extends AppCompatActivity {
         String json = sigfox.GET(deviceIDparameter);
 
         // Returning the first because there can only be one attached to each API key
-
         return parser.getValues(json, "id")[0];
     }
 

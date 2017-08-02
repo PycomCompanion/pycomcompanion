@@ -24,6 +24,7 @@ import com.dayman.poiot.adapters.ApiKey;
 import com.dayman.poiot.adapters.ApiKeyAdapter;
 import com.dayman.poiot.backend.APIManager;
 import com.dayman.poiot.backend.Util;
+import com.dayman.poiot.enums.Tags;
 import com.dayman.poiot.interfaces.OnDeviceInfoDialogClickListener;
 import com.kunzisoft.androidclearchroma.ChromaDialog;
 import com.kunzisoft.androidclearchroma.IndicatorMode;
@@ -36,10 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
     private APIManager mApiManager;
 
-    public static String VERSION = "0.0.4-A";
+    public static String VERSION = "0.0.5-A";
 
     // TODO WARN ABOUT DUPLICATES
     // TODO DISPLAY LINEARLAYOUT WITH TEXTVIEW IF THERE ARE NO SIGFOX ACCOUNTS
+    // TODO SPINNER IN ADD DEVICE TO SELECT DEVICE TYPE FOR DATA GRAPHS
+    // TODO ABILITY TO CREATE GRAPHS
+    // TODO DELETE ALL BUTTON IN TOOLBAR
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
             if (!(creds.size() <= 0)) {
                 for (String c : creds) {
                     String[] split_creds = c.split(",");
+
+                    Log.d("MainActivity.java", c);
+
                     ApiKey key = new ApiKey(split_creds[2], split_creds[0], split_creds[1]);
                     mApiKeys.add(key);
                 }
@@ -106,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
                             ((EditText) dialogView.findViewById(R.id.name_edittext)).setText(mApiKeys.get(index).getName());
                             final Button colourButton = dialogView.findViewById(R.id.sigfox_device_colour_button);
 
+                            // TODO SET DEFAULT COLOUR
+                            colourButton.setTag(Tags.NO_COLOUR);
+
                             dialogView.findViewById(R.id.sigfox_device_colour_button).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(final View view) {
@@ -127,17 +137,18 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
 
-                            createApiKeyDialog(MainActivity.this, dialogView, "Edit " + mApiKeys.get(i).getName(), new OnDeviceInfoDialogClickListener() {
+                            createApiKeyDialog(MainActivity.this, dialogView, "Edit " + mApiKeys.get(index).getName(), new OnDeviceInfoDialogClickListener() {
                                 @Override
                                 public void onPositiveClicked(View dialogView) {
                                     String apiKey = ((EditText) dialogView.findViewById(R.id.loginid_edittext)).getText().toString();
                                     String apiPass = ((EditText) dialogView.findViewById(R.id.password_edittext)).getText().toString();
                                     String apiName = ((EditText) dialogView.findViewById(R.id.name_edittext)).getText().toString();
-                                    String colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString(); // int because it returns an Android color value
+                                    String colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
 
                                     if (!(apiKey.equals("") || apiPass.equals("") || apiName.equals(""))) {
                                         try {
                                             mApiManager.editCreds(index, apiKey, apiPass, apiName, colour);
+                                            Log.d("MainActivity.java", "Writing creds...");
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -148,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         mApiKeyAdapter.notifyDataSetChanged();
 
-                                        Snackbar.make(findViewById(R.id.content_parent), "Created SigFox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
+                                        Snackbar.make(findViewById(R.id.content_parent), "Edited SigFox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
                                     } else {
                                         Snackbar.make(findViewById(R.id.content_parent), "Error: Blank Fields", Snackbar.LENGTH_SHORT).show();
                                     }
@@ -192,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
 
                 final Button colourButton = dialogView.findViewById(R.id.sigfox_device_colour_button);
 
+                colourButton.setTag(Tags.NO_COLOUR);
+
                 colourButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -219,17 +232,21 @@ public class MainActivity extends AppCompatActivity {
                         String apiKey = ((EditText) dialogView.findViewById(R.id.loginid_edittext)).getText().toString();
                         String apiPass = ((EditText) dialogView.findViewById(R.id.password_edittext)).getText().toString();
                         String apiName = ((EditText) dialogView.findViewById(R.id.name_edittext)).getText().toString();
-//                        String colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
+
+                        String colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
 
                         if (!(apiKey.equals("") || apiPass.equals("") || apiName.equals(""))) {
                             ApiKey key = new ApiKey(apiName, apiKey, apiPass);
                             mApiKeys.add(key);
 
                             try {
-                                mApiManager.writeCreds(apiKey, apiPass, apiName);
+                                mApiManager.writeCreds(apiKey, apiPass, apiName, colour);
+                                Log.d("MainActivity.java", "Writing creds...");
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+
+                            mApiKeyAdapter.notifyDataSetChanged();
 
                             Snackbar.make(findViewById(R.id.content_parent), "Created SigFox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
                         } else {
@@ -245,14 +262,19 @@ public class MainActivity extends AppCompatActivity {
 
                 Button b = (Button) d.findViewById(R.id.sigfox_device_colour_button);
 
+                // Make this it's own dedicated listener and share it between the dialogs
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        new ChromaDialog.Builder().initialColor(Color.BLUE).colorMode(ColorMode.ARGB)
-                                .indicatorMode(IndicatorMode.HEX).create().setOnColorSelectedListener(new OnColorSelectedListener() {
+                        ChromaDialog d = new ChromaDialog.Builder().initialColor(Color.BLUE).colorMode(ColorMode.ARGB)
+                                .indicatorMode(IndicatorMode.HEX).create();
+
+                        d.setOnColorSelectedListener(new OnColorSelectedListener() {
+
                             @Override
                             public void onPositiveButtonClick(@ColorInt int color) {
                                 // THIS IS WHEN WE ARE CREATING A NEW API KEY, DO LATER
+                                colourButton.setTag(color);
                             }
 
                             @Override
@@ -261,11 +283,9 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-//                        .show(getSupportFragmentManager(), "ChromaDialog");
+                        d.show(getSupportFragmentManager(), "ChromaDialog");
                     }
                 });
-
-                mApiKeyAdapter.notifyDataSetChanged();
             }
         });
 
@@ -291,9 +311,5 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         return dialog;
-    }
-
-    private void saveCreds() {
-
     }
 }

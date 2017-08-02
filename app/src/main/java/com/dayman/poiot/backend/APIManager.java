@@ -1,6 +1,7 @@
 package com.dayman.poiot.backend;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.CharSink;
@@ -27,6 +28,7 @@ public class APIManager {
 
     // TODO POSSIBLY REMOVE THE TWO METHODS FOR WRITING CREDS
     // TODO CLEANUP
+    // TODO PERHAPS WRITE WITH EDIT MODE
 
     public APIManager(Context context) {
         this.mContext = context;
@@ -68,7 +70,15 @@ public class APIManager {
             contents += s + ",";
         }
 
+        // Sanity check, probably unnecessary but oh well
+        if (contents.endsWith(","))
+            contents = Util.removeLastChar(contents);
+
+        Log.d("APIManager.java", contents);
+
         contents += "\n";
+
+        sink.write(contents);
 
     }
 
@@ -107,26 +117,26 @@ public class APIManager {
         setupFiles();
     }
 
-    public void editCreds(int target, String newLoginID, String newPassword, String newName) throws IOException {
-        // Backup creds
-        ArrayList<String> credsArray = getCreds();
-
-        // Deleting all creds
-        deleteCreds();
-
-        setupFiles();
-
-        // Rewriting all cred to file
-        for (int i = 0; i < credsArray.size(); i++) {
-            if (i == target) {
-                // Writing the new modified credits
-                writeCreds(newLoginID + "," + newPassword + "," + newName);
-            } else {
-                String[] creds = credsArray.get(i).split(",");
-                writeCreds(creds[0] + "," + creds[1] + "," + creds[2]);
-            }
-        }
-    }
+//    public void editCreds(int target, String newLoginID, String newPassword, String newName) throws IOException {
+//        // Backup creds
+//        ArrayList<String> credsArray = getCreds();
+//
+//        // Deleting all creds
+//        deleteCreds();
+//
+//        setupFiles();
+//
+//        // Rewriting all cred to file
+//        for (int i = 0; i < credsArray.size(); i++) {
+//            if (i == target) {
+//                // Writing the new modified credits
+//                writeCreds(newLoginID + "," + newPassword + "," + newName);
+//            } else {
+//                String[] creds = credsArray.get(i).split(",");
+//                writeCreds(creds[0] + "," + creds[1] + "," + creds[2]);
+//            }
+//        }
+//    }
 
     public void editCreds(int target, String... c) throws IOException {
         // Backup creds
@@ -143,6 +153,9 @@ public class APIManager {
             if (i == target) {
                 for (String s : c) {
                     contents += s + ",";
+                    writeCreds(contents);
+
+//                    Log.d("APIManager.java", contents);
                 }
             } else {
                 writeCreds(credsArray.get(i).split(","));
