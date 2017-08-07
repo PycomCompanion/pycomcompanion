@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dayman.poiot.GraphActivity">
+    tools:context="com.dayman.poiot.GraphActivity_">
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/data_line_chart"

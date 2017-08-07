@@ -36,6 +36,8 @@ public class MessagesActivity extends AppCompatActivity {
     private JSigfox sigfox;
     private JParser parser;
 
+    private String[][] graphData;
+
     private ArrayList<SensorData> mSensorData;
 
     @Override
@@ -114,17 +116,19 @@ public class MessagesActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.SETTINGS).withName(R.string.settings_activity_title).withIcon(R.drawable.ic_settings)
                 ).withSelectedItem(0).build();
 
-        d.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(++count).withName(name));
+        d.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(++count).withName(name).withTag(Tags.BLANK));
 
         d.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
             public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                 if (drawerItem.getTag().equals(Tags.GRAPHS)) {
-                    Intent intent = new Intent(view.getContext(), GraphActivity.class);
-
-                    intent.putParcelableArrayListExtra("data", mSensorData);
-
-                    startActivity(intent);
+//                    Intent intent = new Intent(view.getContext(), GraphActivity.class);
+//
+//                    intent.putExtra("data", graphData);
+//                    Bundle mBundle = new Bundle();
+//                    mBundle.putSerializable("list", graphData);
+//                    intent.putExtras(mBundle);
+//                    startActivity(intent);
 
                     d.setSelection(0);
                 } else if (drawerItem.getTag().equals(Tags.ABOUT)) {
@@ -163,6 +167,13 @@ public class MessagesActivity extends AppCompatActivity {
             mMsgDateTime.add(i, mMsgsArray[i].split(",")[1]);
 
             mSensorData.add(new SensorData(mMsgData.get(i), mMsgDateTime.get(i)));
+        }
+
+        graphData = new String[mMsgData.size()][2];
+
+        for(int i = 0; i < mMsgData.size(); i++){
+            graphData[i][0] = mMsgDateTime.get(i);
+            graphData[i][1] = mMsgData.get(i);
         }
     }
 }

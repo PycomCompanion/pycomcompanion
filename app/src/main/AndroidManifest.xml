@@ -21,7 +21,7 @@
         </activity>
         <activity android:name=".MessagesActivity" />
         <activity android:name=".AboutActivity" />
-        <activity android:name=".GraphActivity"></activity>
+        <activity android:name=".GraphActivity" />
     </application>
 
 </manifest>

@@ -57,7 +57,7 @@ public class ApiKeyAdapter extends ArrayAdapter<ApiKey> {
         holder.apiKeyName.setText(name);
 
         // If we haven't set a colour, just keep default background one
-        if (!colour.equals(Tags.NO_COLOUR + ""))
+        if (!colour.equals(Tags.BLANK + ""))
             holder.apiKeyName.setBackgroundColor(Integer.parseInt(colour));
 
         return convertView;

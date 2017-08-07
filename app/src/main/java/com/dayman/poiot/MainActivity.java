@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity {
                             final Button colourButton = dialogView.findViewById(R.id.sigfox_device_colour_button);
 
                             // If we haven't set a colour don't change it
-                            // Otherwise it would get set to Tags.NO_COLOUR
-                            if (!colourButton.getTag().equals(Tags.NO_COLOUR))
+                            // Otherwise it would get set to Tags.BLANK
+                            if (!colourButton.getTag().equals(Tags.BLANK))
                                 colourButton.setTag(Integer.parseInt(mApiKeys.get(index).getColour()));
 
                             dialogView.findViewById(R.id.sigfox_device_colour_button).setOnClickListener(new View.OnClickListener() {
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
 
                 final Button colourButton = dialogView.findViewById(R.id.sigfox_device_colour_button);
 
-                colourButton.setTag(Tags.NO_COLOUR);
+                colourButton.setTag(Tags.BLANK);
 
                 colourButton.setOnClickListener(new View.OnClickListener() {
                     @Override

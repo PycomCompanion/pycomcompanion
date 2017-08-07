@@ -6,7 +6,7 @@ package com.dayman.poiot.enums;
 
 public class Tags {
 
-    public static final int NO_COLOUR = 0;
+    public static final int BLANK = 0;
     public static final int GRAPHS = 1;
     public static final int DATA_LIST = 2;
     public static final int FILTER = 3;

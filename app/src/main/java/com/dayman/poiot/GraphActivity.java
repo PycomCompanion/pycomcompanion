@@ -1,16 +1,22 @@
 package com.dayman.poiot;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.dayman.poiot.adapters.SensorData;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GraphActivity extends AppCompatActivity {
@@ -20,33 +26,68 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-        ArrayList<SensorData> data = getIntent().getParcelableArrayListExtra("data");
+        LineChart chart = (LineChart) findViewById(R.id.data_line_chart);
 
-        LineChart lc = (LineChart) findViewById(R.id.data_line_chart);
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+
+        String[][] graphData = (String[][]) bundle.getSerializable("list");
 
         List<Entry> entries = new ArrayList<>();
 
-//        for (SensorData d : data)
-//            Log.d("GraphActivity.java", d.getData() + "");
+        // Turn your data into Entry objects
+        for(int i = 0; i < graphData.length; i++) {
+            SimpleDateFormat dF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            // The mask 'a' value in the Mask represents AM / PM - h means hours in AM/PM mode
+            // parsing the String into a Date using the mask
 
-        // Fix later, maybe preference for data delimiter
-        for (SensorData d : data) {
-            String[] splitData = d.getData().split("-");
-            Log.d("GraphActivity.java", splitData[0] + "," + splitData[1]);
+            Date date = null;
 
-            entries.add(new Entry(Float.parseFloat(splitData[0]), Float.parseFloat(splitData[1])));
+            try {
+                date = dF.parse(graphData[i][0]);
 
-//            entries.add(new Entry(10, 10));
-//            entries.add(new Entry(10, 20));
-//            entries.add(new Entry(10, 30));
-//            entries.add(new Entry(10, 40));
-//            entries.add(new Entry(10, 50));
+                float epochTime = date.getTime();
+
+                BigDecimal bd = new BigDecimal(epochTime);
+
+                bd = bd.round(new MathContext(7));
+
+                epochTime = bd.floatValue();
+
+                Log.e("date", Float.toString(epochTime));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Date.getTime() method gives you the Long with milliseconds since Epoch.
+            try {
+                entries.add(new Entry(i, Float.parseFloat(graphData[i][1])));
+            }
+            catch (NumberFormatException e){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(graphData[i][1])
+                        .setTitle("Number Format Error")
+                        .setPositiveButton("SKIP", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent myIntent = new Intent(GraphActivity.this, MainActivity.class);
+
+                                GraphActivity.this.startActivity(myIntent);
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
         }
 
-        LineDataSet lds = new LineDataSet(entries, "Temperatures");
-        LineData ld = new LineData(lds);
+        LineDataSet dataSet = new LineDataSet(entries, "Label"); // add entries to dataset
 
-        lc.setData(ld);
-        lc.invalidate();
+        LineData lineData = new LineData(dataSet);
+        chart.setData(lineData);
+        chart.invalidate(); // refresh
     }
 }
