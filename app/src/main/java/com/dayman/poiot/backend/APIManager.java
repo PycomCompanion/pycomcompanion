@@ -121,8 +121,9 @@ public class APIManager {
             if (i == target) {
                 for (String s : c) {
                     contents += s + ",";
-                    writeCreds(contents);
                 }
+
+                writeCreds(contents);
             } else {
                 writeCreds(credsArray.get(i).split(","));
             }

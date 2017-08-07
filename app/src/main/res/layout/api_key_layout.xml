@@ -5,7 +5,7 @@
 
     <TextView
         android:id="@+id/api_key_name_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/api_key_name_placeholder"

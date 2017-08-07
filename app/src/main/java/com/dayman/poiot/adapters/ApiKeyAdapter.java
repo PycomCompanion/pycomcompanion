@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.dayman.poiot.R;
+import com.dayman.poiot.enums.Tags;
 
 import java.util.List;
 
@@ -51,8 +52,13 @@ public class ApiKeyAdapter extends ArrayAdapter<ApiKey> {
         }
 
         String name = getItem(position).getName();
+        String colour = getItem(position).getColour();
 
         holder.apiKeyName.setText(name);
+
+        // If we haven't set a colour, just keep default background one
+        if (!colour.equals(Tags.NO_COLOUR + ""))
+            holder.apiKeyName.setBackgroundColor(Integer.parseInt(colour));
 
         return convertView;
     }

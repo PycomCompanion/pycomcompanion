@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ApiKey> mApiKeys;
     private ApiKeyAdapter mApiKeyAdapter;
 
-    public static String VERSION = "0.0.5-A";
+    public static String VERSION = "0.0.6-A";
 
     // TODO WARN ABOUT DUPLICATES
     // TODO DISPLAY LINEARLAYOUT WITH TEXTVIEW IF THERE ARE NO SIGFOX ACCOUNTS
@@ -117,13 +117,15 @@ public class MainActivity extends AppCompatActivity {
                             ((EditText) dialogView.findViewById(R.id.name_edittext)).setText(mApiKeys.get(index).getName());
                             final Button colourButton = dialogView.findViewById(R.id.sigfox_device_colour_button);
 
-                            // TODO SET DEFAULT COLOUR
-                            colourButton.setTag(Tags.NO_COLOUR);
+                            // If we haven't set a colour don't change it
+                            // Otherwise it would get set to Tags.NO_COLOUR
+                            if (!colourButton.getTag().equals(Tags.NO_COLOUR))
+                                colourButton.setTag(Integer.parseInt(mApiKeys.get(index).getColour()));
 
                             dialogView.findViewById(R.id.sigfox_device_colour_button).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(final View view) {
-                                    ChromaDialog b = new ChromaDialog.Builder().initialColor(Util.fetchPrimaryColorDark(MainActivity.this)).colorMode(ColorMode.ARGB)
+                                    ChromaDialog b = new ChromaDialog.Builder().initialColor(Integer.parseInt(mApiKeys.get(index).getColour())).colorMode(ColorMode.ARGB)
                                             .indicatorMode(IndicatorMode.HEX).create();
 
                                     b.setOnColorSelectedListener(new OnColorSelectedListener() {
@@ -213,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
                 colourButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ChromaDialog b = new ChromaDialog.Builder().initialColor(Util.fetchPrimaryColorDark(MainActivity.this)).colorMode(ColorMode.ARGB)
+                        ChromaDialog b = new ChromaDialog.Builder().initialColor(Color.GRAY).colorMode(ColorMode.ARGB)
                                 .indicatorMode(IndicatorMode.HEX).create();
 
                         b.setOnColorSelectedListener(new OnColorSelectedListener() {
@@ -271,14 +273,13 @@ public class MainActivity extends AppCompatActivity {
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ChromaDialog d = new ChromaDialog.Builder().initialColor(Color.BLUE).colorMode(ColorMode.ARGB)
+                        ChromaDialog d = new ChromaDialog.Builder().initialColor(Util.fetchPrimaryColorDark(MainActivity.this)).colorMode(ColorMode.ARGB)
                                 .indicatorMode(IndicatorMode.HEX).create();
 
                         d.setOnColorSelectedListener(new OnColorSelectedListener() {
 
                             @Override
                             public void onPositiveButtonClick(@ColorInt int color) {
-                                // THIS IS WHEN WE ARE CREATING A NEW API KEY, DO LATER
                                 colourButton.setTag(color);
                             }
 
