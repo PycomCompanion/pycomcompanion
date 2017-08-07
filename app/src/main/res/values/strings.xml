@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">PoIoT</string>
-
     <string name="placeholder">Placeholder</string>
-
     <string name="api_key_name_placeholder">Default Name</string>
+    <string name="blank">0</string>
 
     <string name="delete_all_tooltip">Delete All Devices</string>
     <string name="main_activity_title">Select Sigfox Device</string>

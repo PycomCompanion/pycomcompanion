@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     // TODO SPINNER IN ADD DEVICE TO SELECT DEVICE TYPE FOR DATA GRAPHS
     // TODO ABILITY TO CREATE GRAPHS
     // TODO DELETE ALL BUTTON IN TOOLBAR
+    // TODO SAVE SIGFOX DEVICE MESSAGES TO TEXT FILE (E.G. JSON, CSV, PLAIN TEXT, ETC)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,8 +121,9 @@ public class MainActivity extends AppCompatActivity {
 
                             // If we haven't set a colour don't change it
                             // Otherwise it would get set to Tags.BLANK
-                            if (!colourButton.getTag().equals(Tags.BLANK))
-                                colourButton.setTag(Integer.parseInt(mApiKeys.get(index).getColour()));
+                            if (!(colourButton.getTag() == null))
+                                if (!colourButton.getTag().equals(Tags.BLANK))
+                                    colourButton.setTag(Integer.parseInt(mApiKeys.get(index).getColour()));
 
                             dialogView.findViewById(R.id.sigfox_device_colour_button).setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -150,7 +152,12 @@ public class MainActivity extends AppCompatActivity {
                                     String apiKey = ((EditText) dialogView.findViewById(R.id.loginid_edittext)).getText().toString();
                                     String apiPass = ((EditText) dialogView.findViewById(R.id.password_edittext)).getText().toString();
                                     String apiName = ((EditText) dialogView.findViewById(R.id.name_edittext)).getText().toString();
-                                    String colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
+
+                                    String colour = "" + Tags.BLANK;
+
+                                    if (!(dialogView.findViewById(R.id.sigfox_device_colour_button).getTag() == null)) {
+                                        colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
+                                    }
 
                                     if (!(apiKey.equals("") || apiPass.equals("") || apiName.equals(""))) {
                                         try {

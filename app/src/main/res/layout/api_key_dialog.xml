@@ -82,6 +82,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sigfox_device_color_picker_text"
             android:layout_margin="16dp"
+            android:tag="@string/blank"
             android:layout_gravity="center" />
 
     </LinearLayout>

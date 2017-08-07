@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 public class MessagesActivity extends AppCompatActivity {
 
     // TODO ABILITY TO SEARCH ITEMS, MAYBE IN FILTER SCREEN
+    // TODO MAYBE IMPLEMENT LISTENERS INSTEAD OF USING INNER CLASSES?
 
     private JSigfox sigfox;
     private JParser parser;
@@ -39,6 +41,8 @@ public class MessagesActivity extends AppCompatActivity {
     private String[][] graphData;
 
     private ArrayList<SensorData> mSensorData;
+
+    private SwipeRefreshLayout srl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,14 @@ public class MessagesActivity extends AppCompatActivity {
 
         sigfox = new JSigfox(loginID, password);
         parser = new JParser();
+
+        srl = (SwipeRefreshLayout) findViewById(R.id.messages_swipe_refresh_layout);
+        srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(MessagesActivity.this, "Refreshing...", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         try {
             String deviceID = getDeviceID();

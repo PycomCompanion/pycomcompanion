@@ -125,8 +125,14 @@ public class APIManager {
 
                 writeCreds(contents);
             } else {
-                writeCreds(credsArray.get(i).split(","));
+                contents = credsArray.get(i);
             }
+
+            // Again, sanity check
+            if (contents.endsWith(","))
+                contents = Util.removeLastChar(contents);
+
+            writeCreds(contents);
         }
     }
 }
