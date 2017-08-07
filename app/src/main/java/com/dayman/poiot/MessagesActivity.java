@@ -122,13 +122,13 @@ public class MessagesActivity extends AppCompatActivity {
             @Override
             public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                 if (drawerItem.getTag().equals(Tags.GRAPHS)) {
-//                    Intent intent = new Intent(view.getContext(), GraphActivity.class);
-//
-//                    intent.putExtra("data", graphData);
-//                    Bundle mBundle = new Bundle();
-//                    mBundle.putSerializable("list", graphData);
-//                    intent.putExtras(mBundle);
-//                    startActivity(intent);
+                    Intent intent = new Intent(view.getContext(), GraphActivity.class);
+
+                    intent.putExtra("data", graphData);
+                    Bundle mBundle = new Bundle();
+                    mBundle.putSerializable("list", graphData);
+                    intent.putExtras(mBundle);
+                    startActivity(intent);
 
                     d.setSelection(0);
                 } else if (drawerItem.getTag().equals(Tags.ABOUT)) {
@@ -136,6 +136,10 @@ public class MessagesActivity extends AppCompatActivity {
 
                     startActivity(intent);
 
+                    d.setSelection(0);
+                } else if (drawerItem.getTag().equals(Tags.FILTER)) {
+                    d.setSelection(0);
+                } else if (drawerItem.getTag().equals(Tags.DEVICE_INFO)) {
                     d.setSelection(0);
                 }
 

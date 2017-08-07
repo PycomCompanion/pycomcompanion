@@ -41,10 +41,8 @@ public class GraphActivity extends AppCompatActivity {
             // The mask 'a' value in the Mask represents AM / PM - h means hours in AM/PM mode
             // parsing the String into a Date using the mask
 
-            Date date = null;
-
             try {
-                date = dF.parse(graphData[i][0]);
+                Date date = dF.parse(graphData[i][0]);
 
                 float epochTime = date.getTime();
 
