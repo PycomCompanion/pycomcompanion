@@ -1,5 +1,7 @@
 package com.dayman.poiot.backend;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.TypedValue;
@@ -47,5 +49,10 @@ public class Util {
 
     public static String removeLastChar(String str) {
         return str.substring(0, str.length() - 1);
+    }
+
+    public static void copyToClipboard(ClipboardManager clipboard, String label, String text) {
+        ClipData clip = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clip);
     }
 }

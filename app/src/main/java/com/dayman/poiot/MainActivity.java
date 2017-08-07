@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        // Convert to tags maybe?
                         if (items[i].equals("Edit")) {
                             // Edit dialog
                             final LayoutInflater dialoginflater = LayoutInflater.from(MainActivity.this);

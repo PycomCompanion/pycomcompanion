@@ -8,7 +8,7 @@
     <string name="delete_all_tooltip">Delete All Devices</string>
     <string name="main_activity_title">Select Sigfox Device</string>
     <string name="messages_activity_title">Device Messages</string>
-    <string name="graph_activity_title">Graphs and shit</string>
+    <string name="graph_activity_title">Graphs</string>
     <string name="settings_activity_title">Settings</string>
     <string name="about_activity_title">About</string>
 
@@ -27,6 +27,12 @@
 
     <string name="select_sigfox_device">Select a Sigfox Device</string>
     <string name="device_messages_string">Device Messages</string>
+
+    <string name="drawer_data_list_text">Data List</string>
+    <string name="drawer_filter_text">Filter</string>
+    <string name="drawer_device_info_text">Device Info</string>
+
+    <string name="text_copied_successfully">Copied To Clipboard</string>
 
     <string name="about_text_header">PyCom Companion - A Basic Android App Companion for PyCom Devices</string>
     <string name="about_text_desc">PyCom Companion allows you to view PyCom data sent from a PyCom Sigfox-enabled device, such as a SiPy or FiPy.\n\nDeveloped by Eamonn Rea and Benjamin Young.\n</string>
