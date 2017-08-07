@@ -11,12 +11,13 @@ Screenshots can be found on [Imgur](http://imgur.com/a/YWn8T).
 
 ## Known Bugs
 - Dialogue box for adding device will disappear when switching into split-screen
+- Editing Sigfox devices is currently broken due to bug with colour setting
+- Default colour is wrong
 
 ## Todo
 - Add data visualisation
 - Pull down to refresh Sigfox data
 - Add header image to navigation drawer
-- Better default theme
 - Add settings screen
 - Custom theming options
 - Encrypt Sigfox developer ID
