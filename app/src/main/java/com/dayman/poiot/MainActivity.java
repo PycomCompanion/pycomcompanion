@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     private APIManager mApiManager;
 
+    private ArrayList<ApiKey> mApiKeys;
+    private ApiKeyAdapter mApiKeyAdapter;
+
     public static String VERSION = "0.0.5-A";
 
     // TODO WARN ABOUT DUPLICATES
@@ -50,11 +55,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // TODO DO THIS IN ALL ACTIVITIES
         Toolbar tb = (Toolbar) findViewById(R.id.main_toolbar);
         tb.setTitle(R.string.main_activity_title);
 
-        final ArrayList<ApiKey> mApiKeys = new ArrayList<>();
-        final ApiKeyAdapter mApiKeyAdapter = new ApiKeyAdapter(this, R.layout.api_key_layout, mApiKeys);
+        setSupportActionBar(tb);
+
+        mApiKeys = new ArrayList<>();
+        mApiKeyAdapter = new ApiKeyAdapter(this, R.layout.api_key_layout, mApiKeys);
 
         try {
             mApiManager = new APIManager(getApplicationContext());
@@ -65,9 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 for (String c : creds) {
                     String[] split_creds = c.split(",");
 
-                    Log.d("MainActivity.java", c);
-
-                    ApiKey key = new ApiKey(split_creds[2], split_creds[0], split_creds[1]);
+                    ApiKey key = new ApiKey(split_creds[2], split_creds[0], split_creds[1], split_creds[3]);
                     mApiKeys.add(key);
                 }
             }
@@ -101,8 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // TODO ITEM CLICK OPTIONS WITH items[i]
-
                         if (items[i].equals("Edit")) {
                             // Edit dialog
                             final LayoutInflater dialoginflater = LayoutInflater.from(MainActivity.this);
@@ -156,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                                         mApiKeys.get(index).setLoginID(apiKey);
                                         mApiKeys.get(index).setPassword(apiPass);
                                         mApiKeys.get(index).setName(apiName);
+                                        mApiKeys.get(index).setColour(colour);
 
                                         mApiKeyAdapter.notifyDataSetChanged();
 
@@ -236,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                         String colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
 
                         if (!(apiKey.equals("") || apiPass.equals("") || apiName.equals(""))) {
-                            ApiKey key = new ApiKey(apiName, apiKey, apiPass);
+                            ApiKey key = new ApiKey(apiName, apiKey, apiPass, colour);
                             mApiKeys.add(key);
 
                             try {
@@ -291,6 +296,49 @@ public class MainActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.delete_all_devices:
+                // Naming 101
+                AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
+
+                adb.setTitle("Delete All Sigfox Devices");
+                adb.setMessage("Are you sure you wish to delete ALL Sigfox devices? This action cannot be undone.");
+                adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        try {
+                            mApiManager.clearCreds();
+                            mApiKeys.clear();
+                            mApiKeyAdapter.notifyDataSetChanged();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                AlertDialog ad = adb.create();
+                ad.show();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private AlertDialog createApiKeyDialog(final Context context, final View dialogView, String title, final OnDeviceInfoDialogClickListener listener) {

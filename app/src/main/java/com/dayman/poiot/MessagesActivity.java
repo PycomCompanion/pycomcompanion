@@ -35,6 +35,7 @@ public class MessagesActivity extends AppCompatActivity {
 
         Toolbar tb = (Toolbar) findViewById(R.id.main_toolbar);
         tb.setTitle(R.string.messages_activity_title);
+        tb.setTitle(tb.getTitle().toString() + " - (" + getIntent().getExtras().getString("name") + ")");
 
         String loginID = getIntent().getExtras().getString("loginID");
         String password = getIntent().getExtras().getString("password");

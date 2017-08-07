@@ -10,11 +10,13 @@ public class ApiKey {
     private String name;
     private String loginID;
     private String password;
+    private String colour;
 
-    public ApiKey(String name, String loginID, String password) {
+    public ApiKey(String name, String loginID, String password, String colour) {
         this.name = name;
         this.loginID = loginID;
         this.password = password;
+        this.colour = colour;
     }
 
     public String getName() {
@@ -29,6 +31,10 @@ public class ApiKey {
         return password;
     }
 
+    public String getColour() {
+        return colour;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -39,5 +45,9 @@ public class ApiKey {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
     }
 }

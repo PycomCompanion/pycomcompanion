@@ -5,6 +5,7 @@
 
     <string name="api_key_name_placeholder">Default Name</string>
 
+    <string name="delete_all_tooltip">Delete All Devices</string>
     <string name="main_activity_title">Select Sigfox Device</string>
     <string name="messages_activity_title">Device Messages</string>
     <string name="graph_activity_title">Graphs and shit</string>
