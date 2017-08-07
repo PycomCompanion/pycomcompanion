@@ -65,7 +65,14 @@ public class MessagesActivity extends AppCompatActivity {
         srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                // Preparation for swipe to refresh layout
                 Toast.makeText(MessagesActivity.this, "Refreshing...", Toast.LENGTH_SHORT).show();
+
+                try {
+                    getMessages(getDeviceID());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
