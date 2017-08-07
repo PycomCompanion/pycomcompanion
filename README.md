@@ -11,6 +11,8 @@ Screenshots can be found on [Imgur](http://imgur.com/a/YWn8T).
 
 ## Known Bugs
 - Dialogue box for adding device will disappear when switching into split-screen
+- Swipe to Refresh doesn't work yet
+- Graphs will often cause crashes
 
 ## Todo
 - Add data visualisation
