@@ -21,7 +21,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.dayman.poiot.adapters.ApiKey;
 import com.dayman.poiot.adapters.ApiKeyAdapter;
@@ -150,37 +149,7 @@ public class MainActivity extends AppCompatActivity {
                             createApiKeyDialog(MainActivity.this, dialogView, "Edit " + mApiKeys.get(index).getName(), new OnDeviceInfoDialogClickListener() {
                                 @Override
                                 public void onPositiveClicked(View dialogView) {
-                                    String apiKey = ((EditText) dialogView.findViewById(R.id.loginid_edittext)).getText().toString();
-                                    String apiPass = ((EditText) dialogView.findViewById(R.id.password_edittext)).getText().toString();
-                                    String apiName = ((EditText) dialogView.findViewById(R.id.name_edittext)).getText().toString();
-
-                                    String colour = "" + Tags.BLANK;
-
-                                    if (!(dialogView.findViewById(R.id.sigfox_device_colour_button).getTag() == null)) {
-                                        colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
-                                    }
-
-                                    if (!(apiKey.equals("") || apiPass.equals("") || apiName.equals(""))) {
-                                        try {
-                                            mApiManager.editCreds(index, apiKey, apiPass, apiName, colour);
-                                            Log.d("MainActivity.java", "Writing creds...");
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-
-                                        Toast.makeText(MainActivity.this, "Index is" + index, Toast.LENGTH_SHORT).show();
-
-                                        mApiKeys.get(index).setLoginID(apiKey);
-                                        mApiKeys.get(index).setPassword(apiPass);
-                                        mApiKeys.get(index).setName(apiName);
-                                        mApiKeys.get(index).setColour(colour);
-
-                                        mApiKeyAdapter.notifyDataSetChanged();
-
-                                        Snackbar.make(findViewById(R.id.content_parent), "Edited SigFox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
-                                    } else {
-                                        Snackbar.make(findViewById(R.id.content_parent), "Error: Blank Fields", Snackbar.LENGTH_SHORT).show();
-                                    }
+                                    outputCreds(Tags.EDIT_MODE, index, dialogView);
                                 }
 
                                 @Override
@@ -190,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                             });
 
                         } else if (items[i].equals("Delete")) {
+                            String name = mApiKeys.get(index).getName();
+
                             mApiKeys.remove(index);
                             mApiKeyAdapter.notifyDataSetChanged();
 
@@ -198,8 +169,11 @@ public class MainActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+
+                            Snackbar.make(findViewById(R.id.content_parent), "Deleted " + name, Snackbar.LENGTH_SHORT).show();
                         } else if (items[i].equals("Info")) {
                             // TODO SHOW DEVICE INFO HERE
+                            // CREATION DATE AND TIME?
                         } else {
                             Log.d("MainActivity.java", "Unknown Option Selected");
                         }
@@ -247,29 +221,7 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog d = createApiKeyDialog(MainActivity.this, dialogView, "Add SigFox API Key", new OnDeviceInfoDialogClickListener() {
                     @Override
                     public void onPositiveClicked(View dialogView) {
-                        String apiKey = ((EditText) dialogView.findViewById(R.id.loginid_edittext)).getText().toString();
-                        String apiPass = ((EditText) dialogView.findViewById(R.id.password_edittext)).getText().toString();
-                        String apiName = ((EditText) dialogView.findViewById(R.id.name_edittext)).getText().toString();
-
-                        String colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
-
-                        if (!(apiKey.equals("") || apiPass.equals("") || apiName.equals(""))) {
-                            ApiKey key = new ApiKey(apiName, apiKey, apiPass, colour);
-                            mApiKeys.add(key);
-
-                            try {
-                                mApiManager.writeCreds(apiKey, apiPass, apiName, colour);
-                                Log.d("MainActivity.java", "Writing creds...");
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                            mApiKeyAdapter.notifyDataSetChanged();
-
-                            Snackbar.make(findViewById(R.id.content_parent), "Created SigFox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
-                        } else {
-                            Snackbar.make(findViewById(R.id.content_parent), "Error: Blank Fields", Snackbar.LENGTH_SHORT).show();
-                        }
+                        outputCreds(Tags.WRITE_MODE, 0, dialogView);
                     }
 
                     @Override
@@ -333,6 +285,8 @@ public class MainActivity extends AppCompatActivity {
                             mApiManager.clearCreds();
                             mApiKeys.clear();
                             mApiKeyAdapter.notifyDataSetChanged();
+
+                            Snackbar.make(findViewById(R.id.content_parent), "Deleted All Devices", Snackbar.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -371,5 +325,45 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         return dialog;
+    }
+
+    private void outputCreds(int mode, int index, View dialogView) {
+        String apiKey = ((EditText) dialogView.findViewById(R.id.loginid_edittext)).getText().toString();
+        String apiPass = ((EditText) dialogView.findViewById(R.id.password_edittext)).getText().toString();
+        String apiName = ((EditText) dialogView.findViewById(R.id.name_edittext)).getText().toString();
+
+        String colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
+
+        if (!(apiKey.equals("") || apiPass.equals("") || apiName.equals(""))) {
+            try {
+                if (mode == Tags.WRITE_MODE) {
+                    ApiKey key = new ApiKey(apiName, apiKey, apiPass, colour);
+                    mApiKeys.add(key);
+
+                    mApiManager.writeCreds(apiKey, apiPass, apiName, colour);
+
+                    Snackbar.make(findViewById(R.id.content_parent), "Created SigFox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
+                } else {
+                    if (!(dialogView.findViewById(R.id.sigfox_device_colour_button).getTag() == null)) {
+                        colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
+                    }
+
+                    mApiManager.editCreds(index, apiKey, apiPass, apiName, colour);
+
+                    mApiKeys.get(index).setLoginID(apiKey);
+                    mApiKeys.get(index).setPassword(apiPass);
+                    mApiKeys.get(index).setName(apiName);
+                    mApiKeys.get(index).setColour(colour);
+
+                    Snackbar.make(findViewById(R.id.content_parent), "Edited SigFox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            mApiKeyAdapter.notifyDataSetChanged();
+        } else {
+            Snackbar.make(findViewById(R.id.content_parent), "Error: Blank Fields", Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

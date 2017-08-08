@@ -48,6 +48,10 @@ public class APIManager {
     private void writeCreds(String content) throws IOException {
         CharSink sink = Files.asCharSink(file, Charsets.UTF_8, FileWriteMode.APPEND);
 
+        // Sanity check, probably unnecessary but oh well
+        if (content.endsWith(","))
+            content = Util.removeLastChar(content);
+
         sink.write(content + "\n");
     }
 
@@ -114,8 +118,6 @@ public class APIManager {
         deleteCreds();
         setupFiles();
 
-//        String contents = "";
-
         // Rewriting creds
         for (int i = 0; i < credsArray.size(); i++) {
             if (i == target) {
@@ -125,8 +127,6 @@ public class APIManager {
 
                 writeCreds(contents);
             }
-
-//            writeCreds(contents);
         }
     }
 }
