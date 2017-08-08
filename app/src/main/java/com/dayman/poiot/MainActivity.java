@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                AlertDialog d = createApiKeyDialog(MainActivity.this, dialogView, "Add SigFox API Key", new OnDeviceInfoDialogClickListener() {
+                AlertDialog d = createApiKeyDialog(MainActivity.this, dialogView, "Add Sigfox API Key", new OnDeviceInfoDialogClickListener() {
                     @Override
                     public void onPositiveClicked(View dialogView) {
                         outputCreds(Tags.WRITE_MODE, 0, dialogView);
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onNegativeClicked() {
-                        Snackbar.make(findViewById(R.id.content_parent), "Cancelled adding SigFox API Key", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(findViewById(R.id.content_parent), "Cancelled adding Sigfox API Key", Snackbar.LENGTH_SHORT).show();
                     }
                 });
 
@@ -342,7 +342,7 @@ public class MainActivity extends AppCompatActivity {
 
                     mApiManager.writeCreds(apiKey, apiPass, apiName, colour);
 
-                    Snackbar.make(findViewById(R.id.content_parent), "Created SigFox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(R.id.content_parent), "Created Sigfox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
                 } else {
                     if (!(dialogView.findViewById(R.id.sigfox_device_colour_button).getTag() == null)) {
                         colour = dialogView.findViewById(R.id.sigfox_device_colour_button).getTag().toString();
@@ -355,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
                     mApiKeys.get(index).setName(apiName);
                     mApiKeys.get(index).setColour(colour);
 
-                    Snackbar.make(findViewById(R.id.content_parent), "Edited SigFox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(R.id.content_parent), "Edited Sigfox API Key (" + apiName + ")", Snackbar.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
