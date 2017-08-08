@@ -123,7 +123,7 @@ public class APIManager {
                     contents += s + ",";
                 }
 
-                writeCreds(contents);
+//                writeCreds(contents);
             } else {
                 contents = credsArray.get(i);
             }
