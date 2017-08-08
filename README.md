@@ -7,7 +7,7 @@ This app is designed for use with PyCom devices which use the SiPy board and the
 PyCom Companion is in an early stage and is not considered complete yet. More work has yet to be done. It was created as an in-house way for us to easily view and manage the data coming from our multiple Sigfox-enabled PyTrack and PySense devices.
 
 ## Screenshots
-Screenshots can be found on [Imgur](http://imgur.com/a/YWn8T).
+Screenshots can be found on [Imgur](http://imgur.com/a/Ipkch).
 
 ## Known Bugs
 - Dialogue box for adding device will disappear when switching into split-screen
