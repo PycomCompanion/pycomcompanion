@@ -114,25 +114,19 @@ public class APIManager {
         deleteCreds();
         setupFiles();
 
-        String contents = "";
+//        String contents = "";
 
         // Rewriting creds
         for (int i = 0; i < credsArray.size(); i++) {
             if (i == target) {
-                for (String s : c) {
-                    contents += s + ",";
-                }
-
-//                writeCreds(contents);
+                writeCreds(c);
             } else {
-                contents = credsArray.get(i);
+                String contents = credsArray.get(i);
+
+                writeCreds(contents);
             }
 
-            // Again, sanity check
-            if (contents.endsWith(","))
-                contents = Util.removeLastChar(contents);
-
-            writeCreds(contents);
+//            writeCreds(contents);
         }
     }
 }

@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.dayman.poiot.adapters.ApiKey;
 import com.dayman.poiot.adapters.ApiKeyAdapter;
@@ -166,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
+
+                                        Toast.makeText(MainActivity.this, "Index is" + index, Toast.LENGTH_SHORT).show();
 
                                         mApiKeys.get(index).setLoginID(apiKey);
                                         mApiKeys.get(index).setPassword(apiPass);

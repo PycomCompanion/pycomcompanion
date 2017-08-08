@@ -135,7 +135,7 @@ public class MessagesActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.SETTINGS).withName(R.string.settings_activity_title).withIcon(R.drawable.ic_settings)
                 ).withSelectedItem(0).build();
 
-        d.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(++count).withName(name).withTag(Tags.BLANK));
+        d.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(++count).withName(name).withTag(Tags.BLANK).withSelectable(false));
 
         d.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
