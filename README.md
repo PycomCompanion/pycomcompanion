@@ -9,6 +9,8 @@ PyCom Companion is in an early stage and is not considered complete yet. More wo
 ## Screenshots
 Screenshots can be found on [Imgur](http://imgur.com/a/Ipkch).
 
+Screenshots taken on a rooted Nexus 6.
+
 ## Known Bugs
 - Dialogue box for adding device will disappear when switching into split-screen
 - Swipe to Refresh doesn't work yet
