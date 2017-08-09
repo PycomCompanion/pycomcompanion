@@ -15,8 +15,7 @@ Screenshots taken on a rooted Nexus 6.
 - Dialogue box for adding device will disappear when switching into split-screen
 - Graphs will often cause crashes
 
-## Todo
-- Add data visualisation
+## Desired Features
 - Add header image to navigation drawer
 - Add settings screen
 - Custom theming options
@@ -25,6 +24,7 @@ Screenshots taken on a rooted Nexus 6.
 - Ability to filter data
 - Activity for displaying device information
 - Display device information in the main activity
+- Move processes like saving onto an AsyncTask
 
 ## Contributing
 All code contributions are welcomed. Feature suggestions, code cleanup or general app optimisations are greatly appreciated. As this app is not complete, any contributions towards finishing up the app would be welcome. The app may not be written in the best possible way, so if you are an experienced Android developer and notice thing which could and/or should be done better, do not hesitate to let us know. All contributions help.
