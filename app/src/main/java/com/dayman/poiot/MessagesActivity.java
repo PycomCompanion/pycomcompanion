@@ -4,6 +4,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -30,7 +31,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import java.util.ArrayList;
 
-public class MessagesActivity extends AppCompatActivity {
+public class MessagesActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     // TODO ABILITY TO SEARCH ITEMS, MAYBE IN FILTER SCREEN
     // TODO MAYBE IMPLEMENT LISTENERS INSTEAD OF USING INNER CLASSES?
@@ -62,19 +63,7 @@ public class MessagesActivity extends AppCompatActivity {
         parser = new JParser();
 
         srl = (SwipeRefreshLayout) findViewById(R.id.messages_swipe_refresh_layout);
-        srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Preparation for swipe to refresh layout
-                Toast.makeText(MessagesActivity.this, "Refreshing...", Toast.LENGTH_SHORT).show();
-
-                try {
-                    getMessages(getDeviceID());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        srl.setOnRefreshListener(this);
 
         try {
             String deviceID = getDeviceID();
@@ -197,6 +186,49 @@ public class MessagesActivity extends AppCompatActivity {
         for(int i = 0; i < mMsgData.size(); i++){
             graphData[i][0] = mMsgDateTime.get(i);
             graphData[i][1] = mMsgData.get(i);
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        try {
+            new DownloadMessages().execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        srl.setRefreshing(false);
+    }
+
+    private class DownloadMessages extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            Toast.makeText(MessagesActivity.this, "Refreshing...", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            Toast.makeText(MessagesActivity.this, "Updated Items", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                getMessages(getDeviceID());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
         }
     }
 }
