@@ -151,6 +151,8 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
                     d.setSelection(0);
                 }
 
+                d.closeDrawer();
+
                 return true;
             }
         });

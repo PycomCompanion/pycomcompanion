@@ -22,7 +22,13 @@
         </activity>
         <activity android:name=".MessagesActivity" />
         <activity android:name=".AboutActivity" />
-        <activity android:name=".GraphActivity" />
+        <activity android:name=".GraphActivity"
+            android:parentActivityName="com.dayman.poiot.MessagesActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dayman.poiot.MessagesActivity" />
+        </activity>
     </application>
 
 </manifest>
