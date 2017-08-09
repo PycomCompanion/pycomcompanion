@@ -13,12 +13,10 @@ Screenshots taken on a rooted Nexus 6.
 
 ## Known Bugs
 - Dialogue box for adding device will disappear when switching into split-screen
-- Swipe to Refresh doesn't work yet
 - Graphs will often cause crashes
 
 ## Todo
 - Add data visualisation
-- Pull down to refresh Sigfox data
 - Add header image to navigation drawer
 - Add settings screen
 - Custom theming options
