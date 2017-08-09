@@ -40,11 +40,12 @@ public class GraphActivity extends AppCompatActivity {
             SimpleDateFormat dF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             // The mask 'a' value in the Mask represents AM / PM - h means hours in AM/PM mode
             // parsing the String into a Date using the mask
-
+            float startTime  = 0;
+            float epochTime = 0;
             try {
-                Date date = dF.parse(graphData[i][0]);
+                Date date = dF.parse(graphData[graphData.length -1 -i][0]);
 
-                float epochTime = date.getTime();
+                epochTime = date.getTime();
 
                 BigDecimal bd = new BigDecimal(epochTime);
 
@@ -59,11 +60,11 @@ public class GraphActivity extends AppCompatActivity {
 
             // Date.getTime() method gives you the Long with milliseconds since Epoch.
             try {
-                entries.add(new Entry(i, Float.parseFloat(graphData[i][1])));
+                entries.add(new Entry(epochTime, Float.parseFloat(graphData[graphData.length -1 -i][1])));
             }
             catch (NumberFormatException e){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(graphData[i][1])
+                builder.setMessage(graphData[graphData.length -1 -i][1])
                         .setTitle("Number Format Error")
                         .setPositiveButton("SKIP", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
