@@ -79,10 +79,8 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
 
         msgsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int index, long l) {
                 final CharSequence[] items = { "Copy Data", "Copy Date and Time" };
-
-                final int index = i;
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MessagesActivity.this);
                 builder.setTitle("" + mSensorData.get(index).getData());
@@ -139,9 +137,6 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
                     mBundle.putSerializable("list", graphData);
 
                     intent.putExtra("bundle", mBundle);
-                    intent.putExtra("apiKey", loginID);
-                    intent.putExtra("password", password);
-                    intent.putExtra("name", name);
 
                     startActivity(intent);
 

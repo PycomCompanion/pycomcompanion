@@ -37,10 +37,6 @@ public class GraphActivity extends AppCompatActivity {
 
         Bundle bundle = this.getIntent().getExtras().getBundle("bundle");
 
-        final String loginID = getIntent().getExtras().getString("loginID");
-        final String password = getIntent().getExtras().getString("password");
-        final String name = getIntent().getExtras().getString("name");
-
         String[][] graphData = (String[][]) bundle.getSerializable("list");
 
         List<Entry> entries = new ArrayList<>();
@@ -50,7 +46,6 @@ public class GraphActivity extends AppCompatActivity {
             SimpleDateFormat dF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             // The mask 'a' value in the Mask represents AM / PM - h means hours in AM/PM mode
             // parsing the String into a Date using the mask
-            float startTime  = 0;
             float epochTime = 0;
             try {
                 Date date = dF.parse(graphData[graphData.length -1 -i][0]);
