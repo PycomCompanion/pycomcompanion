@@ -14,8 +14,9 @@ import com.dayman.poiot.R;
 
 public class Util {
 
+    private static TypedValue typedValue = new TypedValue();
+
     public static int fetchAccentColor(Context mContext) {
-        TypedValue typedValue = new TypedValue();
 
         TypedArray a = mContext.obtainStyledAttributes(typedValue.data, new int[] { R.attr.colorAccent });
         int color = a.getColor(0, 0);
@@ -26,8 +27,6 @@ public class Util {
     }
 
     public static int fetchPrimaryColor(Context mContext) {
-        TypedValue typedValue = new TypedValue();
-
         TypedArray a = mContext.obtainStyledAttributes(typedValue.data, new int[] { R.attr.colorPrimary });
         int color = a.getColor(0, 0);
 
@@ -37,8 +36,6 @@ public class Util {
     }
 
     public static int fetchPrimaryColorDark(Context mContext) {
-        TypedValue typedValue = new TypedValue();
-
         TypedArray a = mContext.obtainStyledAttributes(typedValue.data, new int[] { R.attr.colorPrimaryDark });
         int color = a.getColor(0, 0);
 

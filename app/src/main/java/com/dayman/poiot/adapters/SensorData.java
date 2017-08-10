@@ -9,8 +9,7 @@ import android.os.Parcelable;
 
 public class SensorData implements Parcelable {
 
-    private String data;
-    private String dateTime;
+    private String data, dateTime;
 
     public SensorData(String data, String dateTime) {
         this.data = data;
@@ -18,8 +17,8 @@ public class SensorData implements Parcelable {
     }
 
     protected SensorData(Parcel in) {
-        data = in.readString();
-        dateTime = in.readString();
+        this.data = in.readString();
+        this.dateTime = in.readString();
     }
 
     public static final Creator<SensorData> CREATOR = new Creator<SensorData>() {

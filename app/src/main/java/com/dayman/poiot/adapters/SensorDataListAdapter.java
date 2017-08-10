@@ -21,8 +21,7 @@ import java.util.ArrayList;
 public class SensorDataListAdapter extends ArrayAdapter<SensorData> {
 
     private static class SensorDataViewHolder {
-        TextView dataTextView;
-        TextView dateTimeTextView;
+        TextView dataTextView, dateTimeTextView;
     }
 
     private Context mContext;
@@ -43,9 +42,12 @@ public class SensorDataListAdapter extends ArrayAdapter<SensorData> {
 
         if (convertView == null) {
             convertView = mInflater.inflate(mResource, null);
+
             holder = new SensorDataViewHolder();
+
             holder.dataTextView = convertView.findViewById(R.id.data_text_view);
             holder.dateTimeTextView = convertView.findViewById(R.id.date_time_textview);
+
             convertView.setTag(holder);
         } else {
             holder = (SensorDataViewHolder) convertView.getTag();
@@ -55,7 +57,6 @@ public class SensorDataListAdapter extends ArrayAdapter<SensorData> {
 
         holder.dataTextView.setText(sd.getData());
         holder.dateTimeTextView.setText(sd.getDateTime());
-
 
         return convertView;
     }

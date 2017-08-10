@@ -31,8 +31,8 @@ public class ApiKeyAdapter extends ArrayAdapter<ApiKey> {
     public ApiKeyAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<ApiKey> objects) {
         super(context, resource, objects);
 
-        mContext = context;
-        mResource = resource;
+        this.mContext = context;
+        this.mResource = resource;
     }
 
     @NonNull
@@ -44,8 +44,11 @@ public class ApiKeyAdapter extends ArrayAdapter<ApiKey> {
 
         if (convertView == null) {
             convertView = mInflater.inflate(mResource, null);
+
             holder = new ApiKeyViewHolder();
+
             holder.apiKeyName = convertView.findViewById(R.id.api_key_name_textview);
+
             convertView.setTag(holder);
         } else {
             holder = (ApiKeyViewHolder) convertView.getTag();

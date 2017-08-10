@@ -53,9 +53,9 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
         Toolbar tb = (Toolbar) findViewById(R.id.main_toolbar);
         tb.setTitle(R.string.messages_activity_title);
 
-        String loginID = getIntent().getExtras().getString("loginID");
-        String password = getIntent().getExtras().getString("password");
-        String name = getIntent().getExtras().getString("name");
+        final String loginID = getIntent().getExtras().getString("loginID");
+        final String password = getIntent().getExtras().getString("password");
+        final String name = getIntent().getExtras().getString("name");
 
         mSensorData = new ArrayList<>();
 
@@ -118,13 +118,13 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
                         new PrimaryDrawerItem().withIdentifier(count).withTag(Tags.DATA_LIST).withName(R.string.drawer_data_list_text).withIcon(R.drawable.ic_data_list),
                         new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.GRAPHS).withName(R.string.graph_activity_title).withIcon(R.drawable.ic_graph),
                         new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.FILTER).withName(R.string.drawer_filter_text).withIcon(R.drawable.ic_filter),
-                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.DEVICE_INFO).withName(R.string.drawer_device_info_text).withIcon(R.drawable.ic_device_info),
+//                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.DEVICE_INFO).withName(R.string.drawer_device_info_text).withIcon(R.drawable.ic_device_info),
                         new DividerDrawerItem().withIdentifier(++count),
-                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.ABOUT).withName(R.string.about_activity_title).withIcon(R.drawable.ic_info),
-                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.SETTINGS).withName(R.string.settings_activity_title).withIcon(R.drawable.ic_settings)
+                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.ABOUT).withName(R.string.about_activity_title).withIcon(R.drawable.ic_info)
+//                        new PrimaryDrawerItem().withIdentifier(++count).withTag(Tags.SETTINGS).withName(R.string.settings_activity_title).withIcon(R.drawable.ic_settings)
                 ).withSelectedItem(0).build();
 
-        d.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(++count).withName(name).withTag(Tags.BLANK).withSelectable(false));
+        d.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(++count).withName(name).withTag(Tags.BLANK).withSelectable(false).withEnabled(false));
 
         d.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
@@ -133,9 +133,16 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
                     Intent intent = new Intent(view.getContext(), GraphActivity.class);
 
                     intent.putExtra("data", graphData);
+
                     Bundle mBundle = new Bundle();
+
                     mBundle.putSerializable("list", graphData);
-                    intent.putExtras(mBundle);
+
+                    intent.putExtra("bundle", mBundle);
+                    intent.putExtra("apiKey", loginID);
+                    intent.putExtra("password", password);
+                    intent.putExtra("name", name);
+
                     startActivity(intent);
 
                     d.setSelection(0);
@@ -146,8 +153,6 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
 
                     d.setSelection(0);
                 } else if (drawerItem.getTag().equals(Tags.FILTER)) {
-                    d.setSelection(0);
-                } else if (drawerItem.getTag().equals(Tags.DEVICE_INFO)) {
                     d.setSelection(0);
                 }
 

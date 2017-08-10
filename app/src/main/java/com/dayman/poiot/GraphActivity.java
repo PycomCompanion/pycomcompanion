@@ -31,12 +31,15 @@ public class GraphActivity extends AppCompatActivity {
         tb.setTitle(R.string.graph_activity_title);
 
         setSupportActionBar(tb);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         LineChart chart = (LineChart) findViewById(R.id.data_line_chart);
 
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
+        Bundle bundle = this.getIntent().getExtras().getBundle("bundle");
+
+        final String loginID = getIntent().getExtras().getString("loginID");
+        final String password = getIntent().getExtras().getString("password");
+        final String name = getIntent().getExtras().getString("name");
 
         String[][] graphData = (String[][]) bundle.getSerializable("list");
 

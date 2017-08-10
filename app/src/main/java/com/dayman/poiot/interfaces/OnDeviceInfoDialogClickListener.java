@@ -8,7 +8,7 @@ import android.view.View;
 
 public interface OnDeviceInfoDialogClickListener {
 
-    public void onPositiveClicked(View dialogView);
-    public void onNegativeClicked();
+    void onPositiveClicked(View dialogView);
+    void onNegativeClicked();
 
 }

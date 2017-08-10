@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -13,8 +14,7 @@ import java.util.Date;
  * 
  * Email: b.p.young1234@gmail.com
  */
-public class JParser { 
-    
+public class JParser {
     public String[] parseMessageData(String JString) throws Exception {
         JSONObject JObject = new JSONObject(JString);
 
@@ -48,21 +48,19 @@ public class JParser {
     }
     
     private String HexToString(String Hex) {
-        StringBuilder NewStr = new StringBuilder();
+        StringBuilder newStr = new StringBuilder();
 
-        for(int i = 0; i < Hex.length(); i += 2){
-            String s = Hex.substring(i, i + 2);
-
-            NewStr.append((char) Integer.parseInt(s, 16));
+        for(int i = 0; i < Hex.length(); i += 2) {
+            newStr.append((char) Integer.parseInt(Hex.substring(i, i + 2), 16));
         }
 
-        return NewStr.toString();
+        return newStr.toString();
     }
     
-    private String EpochToDate(Long epoch){
+    private String EpochToDate(Long epoch) {
         Date date = new Date(epoch * 1000);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        
-        return(sdf.format(date));
+
+        // Make the mask a setting?
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(date);
     }
 }

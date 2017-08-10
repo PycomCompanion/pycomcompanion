@@ -10,7 +10,6 @@ package com.dayman.poiot.backend;
 
 import android.util.Base64;
 
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -22,21 +21,17 @@ public class JSigfox {
     public JSigfox(String login, String password){
         String auth = login + ":" + password;
 
-        byte[] authBytes = Base64.encode(auth.getBytes(), Base64.DEFAULT);
-
-        authEncodedString = new String(authBytes);       
+        authEncodedString = new String(Base64.encode(auth.getBytes(), Base64.DEFAULT));
     }
     
     public String GET(String urlEx) throws Exception {
-        String url = "https://backend.sigfox.com/api/";
-        String newUrl = url + urlEx;
+        String newUrl = "https://backend.sigfox.com/api/" + urlEx;
 
         URL Url = new URL(newUrl);
         URLConnection conn = Url.openConnection();
         conn.setRequestProperty("Authorization", "Basic " + authEncodedString);
 
-        InputStream is = conn.getInputStream();
-        InputStreamReader isr = new InputStreamReader(is);
+        InputStreamReader isr = new InputStreamReader(conn.getInputStream());
 
         int numCharsRead;
         char[] charArray = new char[1024];
