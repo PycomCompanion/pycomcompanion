@@ -1,15 +1,15 @@
-# PycomCompanion
+# SigfoxCompanion
 A Basic Android App Companion for PyCom Devices
 
 ## About
-This app is designed for use with PyCom devices which use the SiPy board and the Sigfox protocol. Any data sent from a device using the SiPy, such as a PyTrack or PySense, can be viewed in this app.
+Previously PycomCompanion, this app is designed for use with PyCom Sigfox-Enabled devices which use the SiPy board and the Sigfox protocol. Any data sent from a device using the SiPy, such as a PyTrack or PySense, can be viewed in this app.
 
-PyCom Companion is in an early stage and is not considered complete yet. More work has yet to be done. It was created as an in-house way for us to easily view and manage the data coming from our multiple Sigfox-enabled PyTrack and PySense devices.
+Sigfox Companion is in an early stage and is not considered complete yet. More work has yet to be done. It was created as an in-house way for us to easily view and manage the data coming from our multiple Sigfox-enabled PyTrack and PySense devices.
 
 ## Screenshots
 Screenshots can be found on [Imgur](http://imgur.com/a/Ipkch).
 
-Screenshots taken on a rooted Nexus 6.
+Screenshots taken on a rooted Nexus 6. May be slightly outdated.
 
 ## Known Bugs
 - Dialogue box for adding device will disappear when switching into split-screen
@@ -21,7 +21,6 @@ Screenshots taken on a rooted Nexus 6.
 - Custom theming options
 - Encrypt Sigfox developer ID
 - Lower minSdkVersion
-- Ability to filter data
 - Activity for displaying device information
 - Display device information in the main activity
 - Move processes like saving onto an AsyncTask
