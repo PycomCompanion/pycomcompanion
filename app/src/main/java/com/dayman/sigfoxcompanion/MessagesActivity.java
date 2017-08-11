@@ -1,4 +1,4 @@
-package com.dayman.poiot;
+package com.dayman.sigfoxcompanion;
 
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -16,12 +16,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.dayman.poiot.adapters.SensorData;
-import com.dayman.poiot.adapters.SensorDataListAdapter;
-import com.dayman.poiot.backend.JParser;
-import com.dayman.poiot.backend.JSigfox;
-import com.dayman.poiot.backend.Util;
-import com.dayman.poiot.enums.Tags;
+import com.dayman.sigfoxcompanion.adapters.SensorData;
+import com.dayman.sigfoxcompanion.adapters.SensorDataListAdapter;
+import com.dayman.sigfoxcompanion.backend.JParser;
+import com.dayman.sigfoxcompanion.backend.JSigfox;
+import com.dayman.sigfoxcompanion.backend.Util;
+import com.dayman.sigfoxcompanion.enums.Tags;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;

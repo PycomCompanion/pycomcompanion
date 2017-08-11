@@ -1,4 +1,4 @@
-package com.dayman.poiot;
+package com.dayman.sigfoxcompanion;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

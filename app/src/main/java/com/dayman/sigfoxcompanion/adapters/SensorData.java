@@ -1,4 +1,4 @@
-package com.dayman.poiot.adapters;
+package com.dayman.sigfoxcompanion.adapters;
 
 import android.os.Parcel;
 import android.os.Parcelable;

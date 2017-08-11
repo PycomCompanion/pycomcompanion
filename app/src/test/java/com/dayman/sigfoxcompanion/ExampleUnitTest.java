@@ -1,4 +1,4 @@
-package com.dayman.poiot;
+package com.dayman.sigfoxcompanion;
 
 import org.junit.Test;
 

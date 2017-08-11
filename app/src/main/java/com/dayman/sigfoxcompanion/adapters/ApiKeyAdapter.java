@@ -1,4 +1,4 @@
-package com.dayman.poiot.adapters;
+package com.dayman.sigfoxcompanion.adapters;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.dayman.poiot.R;
-import com.dayman.poiot.enums.Tags;
+import com.dayman.sigfoxcompanion.R;
+import com.dayman.sigfoxcompanion.enums.Tags;
 
 import java.util.List;
 

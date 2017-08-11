@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PoIoT</string>
+    <string name="app_name">Sigfox Companion</string>
     <string name="placeholder">Placeholder</string>
     <string name="api_key_name_placeholder">Default Name</string>
     <string name="blank">0</string>
@@ -33,8 +33,8 @@
 
     <string name="text_copied_successfully">Copied To Clipboard</string>
 
-    <string name="about_text_header">PyCom Companion - A Basic Android App Companion for PyCom Devices</string>
-    <string name="about_text_desc">PyCom Companion allows you to view PyCom data sent from a PyCom Sigfox-enabled device, such as a SiPy or FiPy.\n\nDeveloped by Eamonn Rea and Benjamin Young.\n</string>
+    <string name="about_text_header">Sigfox Companion - A Basic Android App Companion for Sigfox-Enabled PyCom Devices</string>
+    <string name="about_text_desc">Sigfox Companion allows you to view PyCom data sent from a PyCom Sigfox-enabled device, such as a SiPy or FiPy.\n\nDeveloped by Eamonn Rea and Benjamin Young.\n</string>
     <string name="about_text_lice">Licensed under the MIT Open Source license. The source code for this application is available on GitHub.</string>
     <string name="about_text_links">\nLinks:</string>
 </resources>

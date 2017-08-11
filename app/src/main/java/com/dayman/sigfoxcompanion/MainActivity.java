@@ -1,4 +1,4 @@
-package com.dayman.poiot;
+package com.dayman.sigfoxcompanion;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,12 +22,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.dayman.poiot.adapters.ApiKey;
-import com.dayman.poiot.adapters.ApiKeyAdapter;
-import com.dayman.poiot.backend.APIManager;
-import com.dayman.poiot.backend.Util;
-import com.dayman.poiot.enums.Tags;
-import com.dayman.poiot.interfaces.OnDeviceInfoDialogClickListener;
+import com.dayman.sigfoxcompanion.adapters.ApiKey;
+import com.dayman.sigfoxcompanion.adapters.ApiKeyAdapter;
+import com.dayman.sigfoxcompanion.backend.APIManager;
+import com.dayman.sigfoxcompanion.backend.Util;
+import com.dayman.sigfoxcompanion.enums.Tags;
+import com.dayman.sigfoxcompanion.interfaces.OnDeviceInfoDialogClickListener;
 import com.kunzisoft.androidclearchroma.ChromaDialog;
 import com.kunzisoft.androidclearchroma.IndicatorMode;
 import com.kunzisoft.androidclearchroma.colormode.ColorMode;

@@ -1,4 +1,4 @@
-package com.dayman.poiot.interfaces;
+package com.dayman.sigfoxcompanion.interfaces;
 
 import android.view.View;
 

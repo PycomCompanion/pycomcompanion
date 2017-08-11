@@ -1,4 +1,4 @@
-package com.dayman.poiot;
+package com.dayman.sigfoxcompanion;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

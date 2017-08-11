@@ -1,4 +1,4 @@
-package com.dayman.poiot;
+package com.dayman.sigfoxcompanion;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

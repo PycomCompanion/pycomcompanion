@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dayman.poiot">
+    package="com.dayman.sigfoxcompanion">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -13,23 +13,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.dayman.sigfoxcompanion.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MessagesActivity" />
-        <activity android:name=".AboutActivity" />
-        <activity android:name=".GraphActivity"
-            android:parentActivityName="com.dayman.poiot.MessagesActivity" >
+        <activity android:name="com.dayman.sigfoxcompanion.MessagesActivity" />
+        <activity android:name="com.dayman.sigfoxcompanion.AboutActivity" />
+        <activity android:name="com.dayman.sigfoxcompanion.GraphActivity"
+            android:parentActivityName="com.dayman.sigfoxcompanion.MessagesActivity" >
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dayman.poiot.MessagesActivity" />
+                android:value="com.dayman.sigfoxcompanion.MessagesActivity" />
         </activity>
-        <activity android:name="com.dayman.poiot.DatePickerActivity" />
+        <activity android:name="com.dayman.sigfoxcompanion.DatePickerActivity" />
     </application>
 
 </manifest>

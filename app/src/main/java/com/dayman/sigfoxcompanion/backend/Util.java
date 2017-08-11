@@ -1,4 +1,4 @@
-package com.dayman.poiot.backend;
+package com.dayman.sigfoxcompanion.backend;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.TypedValue;
 
-import com.dayman.poiot.R;
+import com.dayman.sigfoxcompanion.R;
 
 /**
  * Created by 25143j on 01/08/2017.

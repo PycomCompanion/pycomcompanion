@@ -1,4 +1,4 @@
-package com.dayman.poiot.enums;
+package com.dayman.sigfoxcompanion.enums;
 
 /**
  * Created by 25143j on 02/08/2017.

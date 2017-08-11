@@ -1,4 +1,4 @@
-package com.dayman.poiot.adapters;
+package com.dayman.sigfoxcompanion.adapters;
 
 /**
  * Created by 25143j on 26/07/2017.

@@ -1,4 +1,4 @@
-package com.dayman.poiot;
+package com.dayman.sigfoxcompanion;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +20,8 @@ public class AboutActivity extends AppCompatActivity {
 
         TextView aboutTextSourceLink = (TextView) findViewById(R.id.about_text_source_link);
 
-        String source_code_link = "<a href=\"https://github.com/PycomCompanion/pycomcompanion\">Source code</a>";
+        // Perhaps use Chrome WebView here at some point
+        String source_code_link = "<a href=\"https://github.com/PycomCompanion/sigfoxcompanion\">Source code</a>";
 
         if (Build.VERSION.SDK_INT >= 24)
             aboutTextSourceLink.setText(Html.fromHtml(source_code_link, Html.FROM_HTML_MODE_LEGACY));

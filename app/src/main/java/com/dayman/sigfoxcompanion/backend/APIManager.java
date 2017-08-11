@@ -1,4 +1,4 @@
-package com.dayman.poiot.backend;
+package com.dayman.sigfoxcompanion.backend;
 
 import android.content.Context;
 
