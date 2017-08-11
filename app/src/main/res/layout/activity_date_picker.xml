@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dayman.poiot.DatePickerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select start and end date of filter"
+            android:textSize="18sp"
+            android:layout_marginBottom="30dp"/>
+
+
+        <Button
+            android:id="@+id/BtnStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:layout_marginBottom="30dp"/>
+
+
+        <Button
+            android:id="@+id/BtnEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End"/>
+
+        <Button
+            android:id="@+id/BtnConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm"
+
+            android:layout_marginTop="50dp"/>
+
+        </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

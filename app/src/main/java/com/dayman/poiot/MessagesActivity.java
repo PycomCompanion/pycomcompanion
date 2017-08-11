@@ -29,7 +29,9 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MessagesActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -44,6 +46,9 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
     private ArrayList<SensorData> mSensorData;
 
     private SwipeRefreshLayout srl;
+
+    private int year_x, month_x, day_x;
+    private int DIALOG_ID_START = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,13 +136,9 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
                     Intent intent = new Intent(view.getContext(), GraphActivity.class);
 
                     intent.putExtra("data", graphData);
-
                     Bundle mBundle = new Bundle();
-
                     mBundle.putSerializable("list", graphData);
-
-                    intent.putExtra("bundle", mBundle);
-
+                    intent.putExtras(mBundle);
                     startActivity(intent);
 
                     d.setSelection(0);
@@ -148,6 +149,14 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
 
                     d.setSelection(0);
                 } else if (drawerItem.getTag().equals(Tags.FILTER)) {
+                    Intent intent = new Intent(view.getContext(), DatePickerActivity.class);
+
+                    intent.putExtra("LoginID", getIntent().getExtras().getString("loginID"));
+                    intent.putExtra("Name", getIntent().getExtras().getString("name"));
+                    intent.putExtra("Password", getIntent().getExtras().getString("password"));
+
+                    startActivity(intent);
+
                     d.setSelection(0);
                 }
 
@@ -176,11 +185,33 @@ public class MessagesActivity extends AppCompatActivity implements SwipeRefreshL
         ArrayList<String> mMsgData = new ArrayList<>();
         ArrayList<String> mMsgDateTime = new ArrayList<>();
 
-        for (int i = 0; i < mMsgsArray.length; i++) {
-            mMsgData.add(i, mMsgsArray[i].split(",")[0]);
-            mMsgDateTime.add(i, mMsgsArray[i].split(",")[1]);
+        String endDate = getIntent().getExtras().getString("endDate");
 
-            mSensorData.add(new SensorData(mMsgData.get(i), mMsgDateTime.get(i)));
+        if (endDate == null) {
+            for (int i = 0; i < mMsgsArray.length; i++) {
+                mMsgData.add(i, mMsgsArray[i].split(",")[0]);
+                mMsgDateTime.add(i, mMsgsArray[i].split(",")[1]);
+
+                mSensorData.add(new SensorData(mMsgData.get(i), mMsgDateTime.get(i)));
+            }
+        } else {
+            for (int i = 0; i < mMsgsArray.length; i++) {
+                int j = 0;
+                SimpleDateFormat dF2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat dF1 = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = dF2.parse(mMsgsArray[i].split(",")[1]);
+                long epochDate = date.getTime();
+                long epochStartDate = dF1.parse(getIntent().getExtras().getString("startDate")).getTime();
+                long epochEndDate = dF1.parse(getIntent().getExtras().getString("endDate")).getTime() + 86400000;
+
+                if (epochDate > epochStartDate && epochDate < epochEndDate) {
+                    mMsgData.add(j, mMsgsArray[i].split(",")[0].split(" ")[0]);
+                    mMsgDateTime.add(j, mMsgsArray[i].split(",")[1]);
+
+                    mSensorData.add(new SensorData(mMsgData.get(j), mMsgDateTime.get(j)));
+                    j++;
+                }
+            }
         }
 
         graphData = new String[mMsgData.size()][2];

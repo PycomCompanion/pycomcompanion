@@ -29,6 +29,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dayman.poiot.MessagesActivity" />
         </activity>
+        <activity android:name="com.dayman.poiot.DatePickerActivity" />
     </application>
 
 </manifest>

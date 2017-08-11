@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,22 +32,29 @@ public class GraphActivity extends AppCompatActivity {
         tb.setTitle(R.string.graph_activity_title);
 
         setSupportActionBar(tb);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         LineChart chart = (LineChart) findViewById(R.id.data_line_chart);
 
-        Bundle bundle = this.getIntent().getExtras().getBundle("bundle");
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
 
         String[][] graphData = (String[][]) bundle.getSerializable("list");
 
         List<Entry> entries = new ArrayList<>();
-
+        SimpleDateFormat dF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long startTime=0;
+        try {
+            startTime  = dF.parse(graphData[graphData.length-1][0]).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         // Turn your data into Entry objects
         for(int i = 0; i < graphData.length; i++) {
-            SimpleDateFormat dF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
             // The mask 'a' value in the Mask represents AM / PM - h means hours in AM/PM mode
             // parsing the String into a Date using the mask
-            float epochTime = 0;
+
+            long epochTime = 0;
             try {
                 Date date = dF.parse(graphData[graphData.length -1 -i][0]);
 
@@ -56,8 +64,8 @@ public class GraphActivity extends AppCompatActivity {
 
                 bd = bd.round(new MathContext(7));
 
-                epochTime = bd.floatValue();
-
+                epochTime = bd.longValue();
+                epochTime -= startTime;
                 Log.e("date", Float.toString(epochTime));
             } catch (Exception e) {
                 e.printStackTrace();
